@@ -6,7 +6,7 @@ const Certificate = require("../model/certificateModel");
 // storage config
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/certificates");
+    cb(null, __dirname + "/../uploads/certificates");
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
