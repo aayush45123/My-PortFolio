@@ -19,7 +19,6 @@ const Certifications = () => {
   return (
     <section className={styles.certSection} id="certifications">
       <div className={styles.certContainer}>
-        {/* HEADER */}
         <div className={styles.sectionHeader}>
           <div className={styles.sectionLabel}>Achievements</div>
           <h2 className={styles.sectionTitle}>Certifications</h2>
@@ -28,7 +27,6 @@ const Certifications = () => {
           </p>
         </div>
 
-        {/* GRID */}
         <div className={styles.certGrid}>
           {visibleCerts.map((cert) => (
             <div
@@ -36,15 +34,13 @@ const Certifications = () => {
               className={styles.certCard}
               onClick={() =>
                 window.open(
-                  `${import.meta.env.VITE_API_URL}/uploads/${cert.fileURL}`,
+                  `${import.meta.env.VITE_API_URL}${cert.fileURL}`, // FIX
                   "_blank"
                 )
               }
             >
               <img
-                src={`${import.meta.env.VITE_API_URL}/uploads/${
-                  cert.thumbnailURL
-                }`}
+                src={`${import.meta.env.VITE_API_URL}${cert.thumbnailURL}`} // FIX
                 alt={cert.title}
                 className={styles.certThumbnail}
               />
@@ -53,7 +49,6 @@ const Certifications = () => {
           ))}
         </div>
 
-        {/* VIEW ALL BUTTON */}
         <div className={styles.buttonWrapper}>
           <button
             className={styles.viewBtn}

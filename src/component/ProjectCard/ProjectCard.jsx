@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import styles from "./ProjectCard.module.css";
-import { ExternalLink, Github } from "lucide-react"; // ← added icons
+import { ExternalLink, Github } from "lucide-react";
 
 const ProjectCard = ({ project }) => {
   const cardRef = useRef(null);
@@ -45,18 +45,10 @@ const ProjectCard = ({ project }) => {
   };
 
   const handleMouseLeave = () => {
-    if (!cardRef.current) return;
-
-    const card = cardRef.current;
-    const cardInner = card.querySelector(`.${styles.cardInner}`);
-
+    const cardInner = cardRef.current.querySelector(`.${styles.cardInner}`);
     if (cardInner) {
-      cardInner.style.transform = `
-        perspective(1000px)
-        rotateX(0deg)
-        rotateY(0deg)
-        scale3d(1, 1, 1)
-      `;
+      cardInner.style.transform =
+        "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
     }
   };
 
@@ -68,10 +60,8 @@ const ProjectCard = ({ project }) => {
       onMouseLeave={handleMouseLeave}
     >
       <div className={styles.cardInner}>
-        {/* Shine Effect */}
         <div className={styles.shine}></div>
 
-        {/* Project Image */}
         <div className={styles.projectImage}>
           <img src={project.image} alt={project.title} />
           <div className={styles.projectOverlay}></div>
@@ -82,8 +72,6 @@ const ProjectCard = ({ project }) => {
               className={styles.projectLink}
               target="_blank"
               rel="noopener noreferrer"
-              title="View Live"
-              onClick={(e) => e.stopPropagation()}
             >
               <ExternalLink size={20} />
             </a>
@@ -93,26 +81,19 @@ const ProjectCard = ({ project }) => {
               className={styles.projectLink}
               target="_blank"
               rel="noopener noreferrer"
-              title="View Code"
-              onClick={(e) => e.stopPropagation()}
             >
               <Github size={20} />
             </a>
           </div>
         </div>
 
-        {/* Project Content */}
         <div className={styles.projectContent}>
-          <div className={styles.projectHeader}>
-            <h3 className={styles.projectTitle}>{project.title}</h3>
-          </div>
-
+          <h3 className={styles.projectTitle}>{project.title}</h3>
           <p className={styles.projectDescription}>{project.description}</p>
 
-          {/* Tech Stack Tags */}
           <div className={styles.techStack}>
-            {project.tags.map((tag, tagIndex) => (
-              <span key={tagIndex} className={styles.techTag}>
+            {project.tags.map((tag, index) => (
+              <span key={index} className={styles.techTag}>
                 {tag}
               </span>
             ))}

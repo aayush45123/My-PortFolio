@@ -11,9 +11,7 @@ const Projects = () => {
 
     fetch(`${API_URL}/api/projects`)
       .then((res) => res.json())
-      .then((data) => {
-        setProjects(data);
-      })
+      .then((data) => setProjects(data))
       .catch((err) => console.log("Error fetching projects:", err));
   }, []);
 
@@ -22,7 +20,6 @@ const Projects = () => {
   return (
     <section className={styles.projectsSection} id="projects">
       <div className={styles.projectsContainer}>
-        {/* HEADER */}
         <div className={styles.sectionHeader}>
           <div className={styles.sectionLabel}>Portfolio</div>
           <h2 className={styles.sectionTitle}>Featured Projects</h2>
@@ -32,7 +29,6 @@ const Projects = () => {
           </p>
         </div>
 
-        {/* GRID */}
         <div className={styles.projectsGrid}>
           {visibleProjects.map((project) => (
             <ProjectCard
@@ -40,9 +36,7 @@ const Projects = () => {
               project={{
                 title: project.title,
                 description: project.description,
-                image: `${import.meta.env.VITE_API_URL}/uploads/${
-                  project.imageURL
-                }`,
+                image: `${import.meta.env.VITE_API_URL}${project.imageURL}`, // FIX
                 tags: project.techStack,
                 liveLink: project.liveURL,
                 githubLink: project.githubURL,
@@ -51,7 +45,6 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* VIEW MORE */}
         <div className={styles.viewAllWrapper}>
           <button
             className={styles.viewAllBtn}
