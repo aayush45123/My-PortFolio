@@ -1,0 +1,198 @@
+/* ===================================
+   FLOATINGDOCK.MODULE.CSS
+   =================================== */
+
+.dockWrapper {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 32px 0; /* perfect spacing */
+  z-index: 10;
+  animation: dockSlideUp 0.6s ease-out 1s backwards;
+}
+
+.dock {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px; /* MORE SPACING */
+  padding: 16px 36px;
+  background: var(--bg-secondary);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-speed);
+}
+
+.dockItemWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dockItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  color: var(--text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+}
+
+.dockItem .icon {
+  transition: transform var(--transition-speed);
+}
+
+/* Hover Effects */
+.dockItem.hovered {
+  transform: translateY(-24px) scale(1.4);
+  background: var(--card-hover);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.dockItem.hovered .icon {
+  transform: scale(1.1);
+  color: var(--accent-primary);
+}
+
+/* Adjacent items scaling */
+.dockItem.prevHovered,
+.dockItem.nextHovered {
+  transform: translateY(-12px) scale(1.2);
+}
+
+/* Tooltip */
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  animation: tooltipFadeIn 0.2s ease-out;
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--border-color);
+}
+
+/* Animations */
+@keyframes dockSlideUp {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dockWrapper {
+    bottom: 24px;
+  }
+
+  .dock {
+    gap: 6px;
+    padding: 10px 14px;
+    border-radius: 20px;
+  }
+
+  .dockItem {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+  }
+
+  .dockItem.hovered {
+    transform: translateY(-20px) scale(1.3);
+  }
+
+  .dockItem.prevHovered,
+  .dockItem.nextHovered {
+    transform: translateY(-10px) scale(1.15);
+  }
+
+  .tooltip {
+    font-size: 0.8rem;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dockWrapper {
+    bottom: 20px;
+  }
+
+  .dock {
+    gap: 4px;
+    padding: 8px 12px;
+    border-radius: 18px;
+  }
+
+  .dockItem {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+  }
+
+  .dockItem .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .dockItem.hovered {
+    transform: translateY(-16px) scale(1.2);
+  }
+
+  .dockItem.prevHovered,
+  .dockItem.nextHovered {
+    transform: translateY(-8px) scale(1.1);
+  }
+
+  .tooltip {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    bottom: calc(100% + 12px);
+  }
+}
+.tooltip {
+  z-index: 9999; /* tooltip always on top */
+}
