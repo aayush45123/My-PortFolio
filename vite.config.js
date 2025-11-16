@@ -5,7 +5,6 @@ export default defineConfig(({ mode }) => ({
   base: "/My-PortFolio/", // 👈 REQUIRED for GitHub Pages
   plugins: [react()],
 
-  // Only use proxy while developing locally
   server: {
     proxy:
       mode === "development"
