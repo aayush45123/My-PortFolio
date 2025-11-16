@@ -7,7 +7,9 @@ const Projects = () => {
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    fetch("/api/projects")
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    fetch(`${API_URL}/api/projects`)
       .then((res) => res.json())
       .then((data) => {
         setProjects(data);
@@ -20,7 +22,7 @@ const Projects = () => {
   return (
     <section className={styles.projectsSection} id="projects">
       <div className={styles.projectsContainer}>
-        {/* SECTION HEADER */}
+        {/* HEADER */}
         <div className={styles.sectionHeader}>
           <div className={styles.sectionLabel}>Portfolio</div>
           <h2 className={styles.sectionTitle}>Featured Projects</h2>
@@ -30,7 +32,7 @@ const Projects = () => {
           </p>
         </div>
 
-        {/* PROJECTS GRID */}
+        {/* GRID */}
         <div className={styles.projectsGrid}>
           {visibleProjects.map((project) => (
             <ProjectCard
@@ -38,7 +40,9 @@ const Projects = () => {
               project={{
                 title: project.title,
                 description: project.description,
-                image: project.imageURL,
+                image: `${import.meta.env.VITE_API_URL}/uploads/${
+                  project.imageURL
+                }`,
                 tags: project.techStack,
                 liveLink: project.liveURL,
                 githubLink: project.githubURL,
@@ -47,7 +51,7 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* VIEW MORE / LESS BUTTON */}
+        {/* VIEW MORE */}
         <div className={styles.viewAllWrapper}>
           <button
             className={styles.viewAllBtn}

@@ -5,9 +5,10 @@ const Certifications = () => {
   const [certifications, setCertifications] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
-  // Fetch certificates from backend
   useEffect(() => {
-    fetch("/api/certificates")
+    const API_URL = import.meta.env.VITE_API_URL;
+
+    fetch(`${API_URL}/api/certificates`)
       .then((res) => res.json())
       .then((data) => setCertifications(data))
       .catch((err) => console.log("Error fetching certificates:", err));
@@ -33,10 +34,17 @@ const Certifications = () => {
             <div
               key={cert._id}
               className={styles.certCard}
-              onClick={() => window.open(cert.fileURL, "_blank")}
+              onClick={() =>
+                window.open(
+                  `${import.meta.env.VITE_API_URL}/uploads/${cert.fileURL}`,
+                  "_blank"
+                )
+              }
             >
               <img
-                src={cert.thumbnailURL}
+                src={`${import.meta.env.VITE_API_URL}/uploads/${
+                  cert.thumbnailURL
+                }`}
                 alt={cert.title}
                 className={styles.certThumbnail}
               />
