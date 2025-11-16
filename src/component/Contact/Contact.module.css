@@ -1,0 +1,164 @@
+/* ================================
+   CONTACT SECTION
+   ================================ */
+.contactSection {
+  padding: 100px 20px;
+  display: flex;
+  justify-content: center;
+  background: var(--bg-primary);
+}
+
+/* ================================
+   MAIN WRAPPER (Unified Container)
+   ================================ */
+.contactWrapper {
+  width: 100%;
+  max-width: 1100px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(14px);
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: 0.9fr 1.2fr;
+  gap: 40px;
+  animation: fadeUp 0.9s ease-out;
+}
+
+@media (max-width: 900px) {
+  .contactWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ================================
+   LEFT SIDE - CONTACT INFO
+   ================================ */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.infoTitle {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-secondary);
+}
+
+.icon {
+  color: var(--accent-primary);
+}
+
+.socialLinks {
+  display: flex;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.socialLinks a {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: 0.3s;
+}
+
+.socialLinks a:hover {
+  background: var(--accent-primary);
+  color: #fff;
+  transform: translateY(-4px);
+}
+
+/* ================================
+   RIGHT SIDE - FORM
+   ================================ */
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+input,
+textarea {
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  font-size: 15px;
+  color: var(--text-primary);
+  outline: none;
+  transition: 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--accent-primary);
+  background: var(--bg-primary);
+}
+
+textarea {
+  height: 140px;
+  resize: none;
+}
+
+.submitBtn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--accent-gradient);
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.submitBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ================================
+   ANIMATIONS
+   ================================ */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

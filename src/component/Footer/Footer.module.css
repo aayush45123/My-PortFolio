@@ -1,0 +1,72 @@
+.footerSection {
+  padding: 25px 20px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* HORIZONTAL ROW */
+.footerRow {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* TEXT LEFT */
+.left h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ICONS CENTER */
+.center {
+  display: flex;
+  gap: 16px;
+}
+
+.center a {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  transition: 0.3s;
+}
+
+.center a:hover {
+  background: var(--accent-primary);
+  color: #fff;
+  transform: translateY(-4px);
+}
+
+/* COPYRIGHT RIGHT */
+.right {
+  color: var(--text-tertiary);
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 700px) {
+  .footerRow {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+}
+
+/* FADE ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

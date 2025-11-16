@@ -1,0 +1,223 @@
+/* ===================================
+   3D PROJECT CARD
+   =================================== */
+.projectCard {
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: all var(--transition-speed);
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.cardInner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+.projectCard:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* ===================================
+   PROJECT IMAGE
+   =================================== */
+.projectImage {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-tertiary);
+  transform: translateZ(50px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.projectCard:hover .projectImage img {
+  transform: scale(1.05);
+}
+
+.projectOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+  z-index: 2; /* NEW */
+}
+
+.projectLinks {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%) translateZ(60px);
+  display: flex;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+  z-index: 4; /* NEW so icons appear ABOVE overlay */
+}
+
+.projectCard:hover .projectLinks {
+  opacity: 1;
+}
+
+.projectLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 50%;
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all var(--transition-speed);
+}
+
+.projectLink svg {
+  width: 20px;
+  height: 20px;
+  color: #000; /* BLACK ICONS */
+}
+
+.projectCard:hover .projectLinks {
+  opacity: 1;
+}
+
+.projectLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 18px;
+  transition: all var(--transition-speed);
+}
+
+.projectLink:hover {
+  background: var(--accent-primary);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* ===================================
+   PROJECT CONTENT
+   =================================== */
+.projectContent {
+  padding: 24px;
+  transform: translateZ(30px);
+  position: relative;
+}
+
+.projectHeader {
+  margin-bottom: 16px;
+}
+
+.projectTitle {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.projectDescription {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+/* ===================================
+   TECH STACK TAGS
+   =================================== */
+.techStack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.techTag {
+  padding: 6px 14px;
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-speed);
+  transform: translateZ(20px);
+}
+
+.projectCard:hover .techTag {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* ===================================
+   3D SHINE EFFECT
+   =================================== */
+.shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+.projectCard:hover .shine {
+  opacity: 1;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+@media (max-width: 640px) {
+  .projectImage {
+    height: 200px;
+  }
+
+  .projectContent {
+    padding: 20px;
+  }
+
+  .projectTitle {
+    font-size: 20px;
+  }
+}
