@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // serve uploaded files
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static("Backend/uploads"));
 
 // routes
 app.use("/api/certificates", certificateRoutes);
