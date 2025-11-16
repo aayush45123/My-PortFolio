@@ -5,7 +5,7 @@ const Project = require("../model/projectModel");
 
 // storage for project images
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/projects"),
+  destination: (req, file, cb) => cb(null, __dirname + "/../uploads/projects"),
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
 });
 const upload = multer({ storage });
