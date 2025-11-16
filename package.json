@@ -3,8 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-"homepage": "https://github.com/aayush45123/My-PortFolio",
-
+  "homepage": "https://github.com/aayush45123/My-PortFolio",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
