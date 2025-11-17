@@ -13,41 +13,35 @@ import Footer from "./component/Footer/Footer";
 import AdminUpload from "./component/AdminUpload";
 import AdminLogin from "./component/AdminLogin";
 
+import HeroBackground from "./component/Background/Background"; // ✅ ADD THIS
 import "./App.css";
 
-// ---------------------------
-// HOME COMPONENT
-// ---------------------------
-const Home = () => {
-  return (
-    <>
-      <Navbar />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Certifications />
-      <Contact />
-      <Footer />
-    </>
-  );
-};
+const Home = () => (
+  <>
+    <Navbar />
+    <Hero />
+    <About />
+    <Skills />
+    <Projects />
+    <Certifications />
+    <Contact />
+    <Footer />
+  </>
+);
 
 const App = () => {
   const location = useLocation();
-  const isAdminRoute = location.pathname === "/admin";
-
   const [isAuthenticated, setAuthenticated] = useState(
     localStorage.getItem("admin-auth") === "true"
   );
 
   return (
     <>
-      <Routes>
-        {/* MAIN WEBSITE ROUTE */}
-        <Route path="/" element={<Home />} />
+      {/* ✅ GLOBAL BACKGROUND */}
+      <HeroBackground />
 
-        {/* ADMIN ROUTE */}
+      <Routes>
+        <Route path="/" element={<Home />} />
         <Route
           path="/admin"
           element={
