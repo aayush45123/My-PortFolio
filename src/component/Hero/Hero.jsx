@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ArrowRight, Download } from "lucide-react";
 import styles from "./Hero.module.css";
 import FloatingDock from "../FloatingDock/FloatingDock";
+import resume from "../../assets/resume.pdf";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -84,7 +85,7 @@ const Hero = () => {
               <ArrowRight className={styles.btnIcon} size={20} />
             </button>
 
-            <a href="/resume.pdf" download className={styles.btnSecondary}>
+            <a href={resume} download className={styles.btnSecondary}>
               <Download className={styles.btnIcon} size={20} />
               <span>Download CV</span>
             </a>
