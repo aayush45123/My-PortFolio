@@ -13,6 +13,9 @@
   padding: 120px 24px 80px;
   transition: background-color var(--transition-speed);
 }
+a{
+  text-decoration: none;
+}
 
 .heroContainer {
   max-width: 1200px;
