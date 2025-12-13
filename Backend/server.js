@@ -10,7 +10,15 @@ const projectRoutes = require("./routes/projectRoutes");
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://aayush45123.github.io/My-PortFolio/",
+    ],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Serve uploaded images/PDFs
