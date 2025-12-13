@@ -50,6 +50,8 @@ const AdminUpload = () => {
 
   // Upload project
   const uploadProject = async (e) => {
+    console.log("API BASE URL:", api.defaults.baseURL);
+
     e.preventDefault();
 
     if (!projTitle || !projImage) {
