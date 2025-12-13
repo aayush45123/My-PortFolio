@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import api from "../api/axios"; // ✅ USE AXIOS INSTANCE
 
 const AdminUpload = () => {
   const [activeTab, setActiveTab] = useState("certificate");
@@ -36,9 +36,7 @@ const AdminUpload = () => {
     formData.append("thumbnail", certThumbnail);
 
     try {
-      await axios.post("/api/certificates", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await api.post("/api/certificates", formData);
 
       setCertMessage("Certificate uploaded successfully!");
       setCertTitle("");
@@ -68,9 +66,7 @@ const AdminUpload = () => {
     formData.append("image", projImage);
 
     try {
-      await axios.post("/api/projects", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await api.post("/api/projects", formData);
 
       setProjMessage("Project uploaded successfully!");
       setProjTitle("");
@@ -89,7 +85,6 @@ const AdminUpload = () => {
     <div style={styles.container}>
       <h2 style={styles.heading}>Admin Panel</h2>
 
-      {/* TABS */}
       <div style={styles.tabs}>
         <button
           style={activeTab === "certificate" ? styles.activeTab : styles.tab}
@@ -106,7 +101,6 @@ const AdminUpload = () => {
         </button>
       </div>
 
-      {/* CERTIFICATE TAB */}
       {activeTab === "certificate" && (
         <form onSubmit={uploadCertificate} style={styles.form}>
           <label style={styles.label}>Certificate Title</label>
@@ -143,12 +137,10 @@ const AdminUpload = () => {
           <button type="submit" style={styles.button}>
             Upload Certificate
           </button>
-
           <p style={styles.msg}>{certMessage}</p>
         </form>
       )}
 
-      {/* PROJECT TAB */}
       {activeTab === "project" && (
         <form onSubmit={uploadProject} style={styles.form}>
           <label style={styles.label}>Project Title</label>
@@ -196,7 +188,6 @@ const AdminUpload = () => {
           <button type="submit" style={styles.button}>
             Upload Project
           </button>
-
           <p style={styles.msg}>{projMessage}</p>
         </form>
       )}
@@ -204,7 +195,6 @@ const AdminUpload = () => {
   );
 };
 
-// STYLES
 const styles = {
   container: {
     padding: "30px",
@@ -259,7 +249,6 @@ const styles = {
     border: "none",
     cursor: "pointer",
     color: "#fff",
-    marginTop: "10px",
   },
   msg: { textAlign: "center", marginTop: "10px" },
 };
