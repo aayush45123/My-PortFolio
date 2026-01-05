@@ -85,6 +85,122 @@
 }
 
 /* ===================================
+   FLOATING SKILLS ICONS SECTION
+   =================================== */
+.floatingSkillsContainer {
+  margin-bottom: 80px;
+  padding: 40px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.floatingSkillsContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--accent-gradient);
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+.floatingSkillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+.floatingSkillBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: var(--bg-primary);
+  border-radius: 16px;
+  border: 2px solid var(--border-color);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  animation: floatIn 0.6s ease-out forwards;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes floatIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.floatingSkillBox::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent-gradient);
+  opacity: 0;
+  transition: opacity var(--transition-speed);
+}
+
+.floatingSkillBox:hover {
+  transform: translateY(-8px) scale(1.05);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-lg), 0 0 30px rgba(59, 130, 246, 0.2);
+}
+
+.floatingSkillBox:hover::before {
+  opacity: 0.05;
+}
+
+.floatingSkillLogo {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-speed);
+  filter: grayscale(0.3);
+}
+
+.floatingSkillBox:hover .floatingSkillLogo {
+  filter: grayscale(0);
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Animation for continuous floating effect */
+@keyframes continuousFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floatingSkillBox {
+  animation: floatIn 0.6s ease-out forwards,
+    continuousFloat 3s ease-in-out infinite;
+}
+
+.floatingSkillBox:nth-child(odd) {
+  animation-delay: 0s, 0s;
+}
+
+.floatingSkillBox:nth-child(even) {
+  animation-delay: 0.1s, 1.5s;
+}
+
+/* ===================================
    SKILLS GRID
    =================================== */
 .skillsGrid {
@@ -114,6 +230,10 @@
   animation-delay: 0.6s;
 }
 
+.skillCategory:nth-child(5) {
+  animation-delay: 0.7s;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -130,18 +250,6 @@
   align-items: center;
   gap: 12px;
   margin-bottom: 24px;
-}
-
-.categoryIcon {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--accent-gradient);
-  border-radius: 10px;
-  font-size: 20px;
-  color: white;
 }
 
 .categoryTitle {
@@ -217,7 +325,7 @@
 }
 
 .progressFill::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -241,11 +349,6 @@
   }
 }
 
-/* Initial state for animation */
-.progressFill.animate {
-  width: 0;
-}
-
 /* ===================================
    RESPONSIVE DESIGN
    =================================== */
@@ -257,6 +360,16 @@
 
   .sectionTitle {
     font-size: 36px;
+  }
+
+  .floatingSkillsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 20px;
+  }
+
+  .floatingSkillLogo {
+    width: 50px;
+    height: 50px;
   }
 }
 
@@ -273,6 +386,25 @@
     font-size: 32px;
   }
 
+  .floatingSkillsContainer {
+    padding: 20px;
+    margin-bottom: 60px;
+  }
+
+  .floatingSkillsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 16px;
+  }
+
+  .floatingSkillBox {
+    padding: 16px;
+  }
+
+  .floatingSkillLogo {
+    width: 45px;
+    height: 45px;
+  }
+
   .skillsGrid {
     gap: 24px;
   }
@@ -281,13 +413,42 @@
     padding: 16px;
   }
 
-  .categoryIcon {
-    width: 36px;
-    height: 36px;
-    font-size: 18px;
-  }
-
   .categoryTitle {
     font-size: 18px;
   }
+}
+
+@media (max-width: 480px) {
+  .floatingSkillsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .floatingSkillBox {
+    padding: 12px;
+  }
+
+  .floatingSkillLogo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ===================================
+   DARK MODE ADJUSTMENTS
+   =================================== */
+[data-theme="dark"] .floatingSkillLogo {
+  filter: brightness(1.1) grayscale(0.2);
+}
+
+[data-theme="dark"] .floatingSkillBox:hover .floatingSkillLogo {
+  filter: brightness(1.2) grayscale(0);
+}
+
+[data-theme="dark"] .floatingSkillsContainer {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .floatingSkillBox {
+  background: var(--bg-primary);
 }
