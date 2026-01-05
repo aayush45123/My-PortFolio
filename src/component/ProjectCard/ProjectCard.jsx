@@ -53,14 +53,23 @@ const ProjectCard = ({ project }) => {
     }
   };
 
-  const openModal = () => {
+  const openModal = (e) => {
+    e.stopPropagation(); // Prevent event bubbling
     setShowModal(true);
     document.body.style.overflow = "hidden";
   };
 
-  const closeModal = () => {
+  const closeModal = (e) => {
+    if (e) e.stopPropagation(); // Prevent event bubbling
     setShowModal(false);
     document.body.style.overflow = "auto";
+  };
+
+  const handleOverlayClick = (e) => {
+    // Only close if clicking directly on overlay, not on modal content
+    if (e.target === e.currentTarget) {
+      closeModal(e);
+    }
   };
 
   // Truncate description to 2 lines
@@ -138,11 +147,8 @@ const ProjectCard = ({ project }) => {
 
       {/* Modal */}
       {showModal && (
-        <div className={styles.modalOverlay} onClick={closeModal}>
-          <div
-            className={styles.modalContent}
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className={styles.modalOverlay} onClick={handleOverlayClick}>
+          <div className={styles.modalContent}>
             <button className={styles.closeBtn} onClick={closeModal}>
               <X size={24} />
             </button>
