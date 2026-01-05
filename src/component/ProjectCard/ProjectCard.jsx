@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./ProjectCard.module.css";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, X, Calendar, Code } from "lucide-react";
 
 const ProjectCard = ({ project }) => {
   const cardRef = useRef(null);
+  const [showModal, setShowModal] = useState(false);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -17,8 +18,8 @@ const ProjectCard = ({ project }) => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -15;
-    const rotateY = ((x - centerX) / centerX) * 15;
+    const rotateX = ((y - centerY) / centerY) * -10;
+    const rotateY = ((x - centerX) / centerX) * 10;
 
     const cardInner = card.querySelector(`.${styles.cardInner}`);
     if (cardInner) {
@@ -52,55 +53,192 @@ const ProjectCard = ({ project }) => {
     }
   };
 
+  const openModal = () => {
+    setShowModal(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    document.body.style.overflow = "auto";
+  };
+
+  // Truncate description to 2 lines
+  const truncateText = (text, maxLength = 120) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + "...";
+  };
+
   return (
-    <div
-      ref={cardRef}
-      className={styles.projectCard}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className={styles.cardInner}>
-        <div className={styles.shine}></div>
+    <>
+      <div
+        ref={cardRef}
+        className={styles.projectCard}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className={styles.cardInner}>
+          <div className={styles.shine}></div>
 
-        <div className={styles.projectImage}>
-          <img src={project.image} alt={project.title} />
-          <div className={styles.projectOverlay}></div>
+          <div className={styles.projectImage}>
+            <img src={project.image} alt={project.title} />
+            <div className={styles.projectOverlay}></div>
 
-          <div className={styles.projectLinks}>
-            <a
-              href={project.liveLink}
-              className={styles.projectLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <ExternalLink size={20} />
-            </a>
+            <div className={styles.projectLinks}>
+              <a
+                href={project.liveLink}
+                className={styles.projectLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Live Demo"
+              >
+                <ExternalLink size={20} />
+              </a>
 
-            <a
-              href={project.githubLink}
-              className={styles.projectLink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Github size={20} />
-            </a>
+              <a
+                href={project.githubLink}
+                className={styles.projectLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Source Code"
+              >
+                <Github size={20} />
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div className={styles.projectContent}>
-          <h3 className={styles.projectTitle}>{project.title}</h3>
-          <p className={styles.projectDescription}>{project.description}</p>
+          <div className={styles.projectContent}>
+            <div className={styles.projectHeader}>
+              <h3 className={styles.projectTitle}>{project.title}</h3>
+            </div>
 
-          <div className={styles.techStack}>
-            {project.tags.map((tag, index) => (
-              <span key={index} className={styles.techTag}>
-                {tag}
-              </span>
-            ))}
+            <p className={styles.projectDescription}>
+              {truncateText(project.description, 120)}
+            </p>
+
+            <div className={styles.techStack}>
+              {project.tags.slice(0, 4).map((tag, index) => (
+                <span key={index} className={styles.techTag}>
+                  {tag}
+                </span>
+              ))}
+              {project.tags.length > 4 && (
+                <span className={styles.techTag}>
+                  +{project.tags.length - 4}
+                </span>
+              )}
+            </div>
+
+            <button className={styles.showMoreBtn} onClick={openModal}>
+              Show More
+            </button>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Modal */}
+      {showModal && (
+        <div className={styles.modalOverlay} onClick={closeModal}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button className={styles.closeBtn} onClick={closeModal}>
+              <X size={24} />
+            </button>
+
+            <div className={styles.modalGrid}>
+              {/* Left Side - Image */}
+              <div className={styles.modalImageSection}>
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className={styles.modalImage}
+                />
+                <div className={styles.modalLinks}>
+                  <a
+                    href={project.liveLink}
+                    className={styles.modalLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <ExternalLink size={18} />
+                    <span>Live Demo</span>
+                  </a>
+                  <a
+                    href={project.githubLink}
+                    className={styles.modalLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Github size={18} />
+                    <span>Source Code</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Right Side - Details */}
+              <div className={styles.modalDetailsSection}>
+                <div className={styles.modalHeader}>
+                  <h2 className={styles.modalTitle}>{project.title}</h2>
+                  {project.date && (
+                    <div className={styles.projectDate}>
+                      <Calendar size={16} />
+                      <span>{project.date}</span>
+                    </div>
+                  )}
+                </div>
+
+                <div className={styles.modalBody}>
+                  <div className={styles.section}>
+                    <h4 className={styles.sectionTitle}>
+                      <Code size={18} />
+                      About Project
+                    </h4>
+                    <p className={styles.modalDescription}>
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {project.features && (
+                    <div className={styles.section}>
+                      <h4 className={styles.sectionTitle}>Key Features</h4>
+                      <ul className={styles.featuresList}>
+                        {project.features.map((feature, index) => (
+                          <li key={index}>{feature}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  <div className={styles.section}>
+                    <h4 className={styles.sectionTitle}>Technologies Used</h4>
+                    <div className={styles.modalTechStack}>
+                      {project.tags.map((tag, index) => (
+                        <span key={index} className={styles.modalTechTag}>
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {project.challenges && (
+                    <div className={styles.section}>
+                      <h4 className={styles.sectionTitle}>
+                        Challenges & Solutions
+                      </h4>
+                      <p className={styles.modalDescription}>
+                        {project.challenges}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
