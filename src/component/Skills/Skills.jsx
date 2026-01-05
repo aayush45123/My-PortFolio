@@ -5,6 +5,55 @@ const Skills = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
+  // Floating skill logos data
+  const floatingSkills = [
+    {
+      name: "React",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    },
+    {
+      name: "HTML5",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+    },
+    {
+      name: "CSS3",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+    },
+    {
+      name: "Bootstrap",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg",
+    },
+    {
+      name: "Express",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+    },
+    {
+      name: "GitHub",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
+    },
+    {
+      name: "Git",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
+    },
+    {
+      name: "MongoDB",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    },
+    {
+      name: "MySQL",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+    },
+    {
+      name: "Node.js",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+    },
+    {
+      name: "Arduino",
+      logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg",
+    },
+  ];
+
+  // Skills data with progress bars
   const skillsData = [
     {
       category: "Frontend Development",
@@ -78,14 +127,36 @@ const Skills = () => {
         {/* Section Header */}
         <div className={styles.sectionHeader}>
           <div className={styles.sectionLabel}>Skills</div>
-          <h2 className={styles.sectionTitle}>Technical Expertise</h2>
+          <h2 className={styles.sectionTitle}>
+            I have experience with these technologies
+          </h2>
           <p className={styles.sectionDescription}>
             A comprehensive overview of my technical skills and proficiency
             levels across various technologies and tools.
           </p>
         </div>
 
-        {/* Skills Grid */}
+        {/* Floating Skills Icons Section */}
+        <div className={styles.floatingSkillsContainer}>
+          <div className={styles.floatingSkillsGrid}>
+            {floatingSkills.map((skill, index) => (
+              <div
+                key={index}
+                className={styles.floatingSkillBox}
+                style={{ animationDelay: `${index * 0.05}s` }}
+              >
+                <img
+                  src={skill.logo}
+                  alt={skill.name}
+                  className={styles.floatingSkillLogo}
+                  title={skill.name}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Skills Grid with Progress Bars */}
         <div className={styles.skillsGrid}>
           {skillsData.map((category, categoryIndex) => (
             <div key={categoryIndex} className={styles.skillCategory}>
