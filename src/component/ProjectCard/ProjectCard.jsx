@@ -1,10 +1,31 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import styles from "./ProjectCard.module.css";
 import { ExternalLink, Github, X, Calendar, Code } from "lucide-react";
 
 const ProjectCard = ({ project }) => {
   const cardRef = useRef(null);
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    if (!showModal) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleEscClose = (event) => {
+      if (event.key === "Escape") {
+        setShowModal(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.body.style.overflow = prevOverflow || "auto";
+      window.removeEventListener("keydown", handleEscClose);
+    };
+  }, [showModal]);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -56,13 +77,11 @@ const ProjectCard = ({ project }) => {
   const openModal = (e) => {
     e.stopPropagation(); // Prevent event bubbling
     setShowModal(true);
-    document.body.style.overflow = "hidden";
   };
 
   const closeModal = (e) => {
     if (e) e.stopPropagation(); // Prevent event bubbling
     setShowModal(false);
-    document.body.style.overflow = "auto";
   };
 
   const handleOverlayClick = (e) => {
@@ -146,104 +165,106 @@ const ProjectCard = ({ project }) => {
       </div>
 
       {/* Modal */}
-      {showModal && (
-        <div className={styles.modalOverlay} onClick={handleOverlayClick}>
-          <div className={styles.modalContent}>
-            <button className={styles.closeBtn} onClick={closeModal}>
-              <X size={24} />
-            </button>
+      {showModal &&
+        createPortal(
+          <div className={styles.modalOverlay} onClick={handleOverlayClick}>
+            <div className={styles.modalContent}>
+              <button className={styles.closeBtn} onClick={closeModal}>
+                <X size={24} />
+              </button>
 
-            <div className={styles.modalGrid}>
-              {/* Left Side - Image */}
-              <div className={styles.modalImageSection}>
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className={styles.modalImage}
-                />
-                <div className={styles.modalLinks}>
-                  <a
-                    href={project.liveLink}
-                    className={styles.modalLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink size={18} />
-                    <span>Live Demo</span>
-                  </a>
-                  <a
-                    href={project.githubLink}
-                    className={styles.modalLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Github size={18} />
-                    <span>Source Code</span>
-                  </a>
-                </div>
-              </div>
-
-              {/* Right Side - Details */}
-              <div className={styles.modalDetailsSection}>
-                <div className={styles.modalHeader}>
-                  <h2 className={styles.modalTitle}>{project.title}</h2>
-                  {project.date && (
-                    <div className={styles.projectDate}>
-                      <Calendar size={16} />
-                      <span>{project.date}</span>
-                    </div>
-                  )}
+              <div className={styles.modalGrid}>
+                {/* Left Side - Image */}
+                <div className={styles.modalImageSection}>
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className={styles.modalImage}
+                  />
+                  <div className={styles.modalLinks}>
+                    <a
+                      href={project.liveLink}
+                      className={styles.modalLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <ExternalLink size={18} />
+                      <span>Live Demo</span>
+                    </a>
+                    <a
+                      href={project.githubLink}
+                      className={styles.modalLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Github size={18} />
+                      <span>Source Code</span>
+                    </a>
+                  </div>
                 </div>
 
-                <div className={styles.modalBody}>
-                  <div className={styles.section}>
-                    <h4 className={styles.sectionTitle}>
-                      <Code size={18} />
-                      About Project
-                    </h4>
-                    <p className={styles.modalDescription}>
-                      {project.description}
-                    </p>
+                {/* Right Side - Details */}
+                <div className={styles.modalDetailsSection}>
+                  <div className={styles.modalHeader}>
+                    <h2 className={styles.modalTitle}>{project.title}</h2>
+                    {project.date && (
+                      <div className={styles.projectDate}>
+                        <Calendar size={16} />
+                        <span>{project.date}</span>
+                      </div>
+                    )}
                   </div>
 
-                  {project.features && (
-                    <div className={styles.section}>
-                      <h4 className={styles.sectionTitle}>Key Features</h4>
-                      <ul className={styles.featuresList}>
-                        {project.features.map((feature, index) => (
-                          <li key={index}>{feature}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  <div className={styles.section}>
-                    <h4 className={styles.sectionTitle}>Technologies Used</h4>
-                    <div className={styles.modalTechStack}>
-                      {project.tags.map((tag, index) => (
-                        <span key={index} className={styles.modalTechTag}>
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {project.challenges && (
+                  <div className={styles.modalBody}>
                     <div className={styles.section}>
                       <h4 className={styles.sectionTitle}>
-                        Challenges & Solutions
+                        <Code size={18} />
+                        About Project
                       </h4>
                       <p className={styles.modalDescription}>
-                        {project.challenges}
+                        {project.description}
                       </p>
                     </div>
-                  )}
+
+                    {project.features && (
+                      <div className={styles.section}>
+                        <h4 className={styles.sectionTitle}>Key Features</h4>
+                        <ul className={styles.featuresList}>
+                          {project.features.map((feature, index) => (
+                            <li key={index}>{feature}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <div className={styles.section}>
+                      <h4 className={styles.sectionTitle}>Technologies Used</h4>
+                      <div className={styles.modalTechStack}>
+                        {project.tags.map((tag, index) => (
+                          <span key={index} className={styles.modalTechTag}>
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {project.challenges && (
+                      <div className={styles.section}>
+                        <h4 className={styles.sectionTitle}>
+                          Challenges & Solutions
+                        </h4>
+                        <p className={styles.modalDescription}>
+                          {project.challenges}
+                        </p>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </div>,
+          document.body
+        )}
     </>
   );
 };
