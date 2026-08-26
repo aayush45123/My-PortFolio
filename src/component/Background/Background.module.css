@@ -1,29 +1,27 @@
-/* Subtle dot grid — no floating blob */
+/* ===================================
+   GLOBAL BACKGROUND
+   =================================== */
 .bgGradient {
   display: none;
 }
 
+/* Dot grid — visible in both themes */
 .bgGrid {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: radial-gradient(circle, var(--border-color) 1px, transparent 1px);
-  background-size: 28px 28px;
-  opacity: 1;
   pointer-events: none;
   z-index: 0;
-  transition: opacity 0.3s;
+  transition: background-image 0.3s;
+
+  /* Dark mode default: light dots on near-black */
+  background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-/* Light mode: very subtle */
-:root .bgGrid {
-  opacity: 0.5;
+/* Light mode: dark dots on white */
+:root:not([data-theme="dark"]) .bgGrid {
+  background-image: radial-gradient(circle, rgba(0,0,0,0.07) 1px, transparent 1px);
 }
-
-/* Dark mode: a bit more visible */
-[data-theme="dark"] .bgGrid {
-  opacity: 0.8;
-}
-
