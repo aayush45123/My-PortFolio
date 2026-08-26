@@ -1,72 +1,105 @@
 /* ===================================
-   APP.CSS - THEME VARIABLES
+   GOOGLE FONTS
+   =================================== */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+
+/* ===================================
+   APP.CSS - DESIGN TOKENS
    =================================== */
 
 :root {
-  /* Light Theme Colors */
+  /* Light Theme — clean white */
   --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: #e9ecef;
-  
-  --text-primary: #1a1a1a;
-  --text-secondary: #4a5568;
-  --text-tertiary: #718096;
-  
-  --border-color: #e2e8f0;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
-  
-  --accent-primary: #3b82f6;
-  --accent-secondary: #8b5cf6;
-  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-  
-  --navbar-bg: rgba(255, 255, 255, 0.8);
-  --navbar-border: rgba(0, 0, 0, 0.1);
-  
-  --card-bg: #ffffff;
-  --card-hover: #f8f9fa;
-  
-  --transition-speed: 0.3s;
+  --bg-secondary: #f6f6f6;
+  --bg-tertiary: #eeeeee;
+
+  --text-primary: #0a0a0a;
+  --text-secondary: #505050;
+  --text-tertiary: #909090;
+
+  --border-color: #e4e4e4;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,0.12);
+
+  --accent: #5B4FFF;
+  --accent-hover: #4840d4;
+  --accent-muted: rgba(91, 79, 255, 0.08);
+
+  /* Keep for compatibility */
+  --accent-primary: #5B4FFF;
+  --accent-secondary: #4840d4;
+  --accent-gradient: linear-gradient(135deg, #5B4FFF 0%, #7c6fff 100%);
+
+  --navbar-bg: rgba(255, 255, 255, 0.92);
+  --navbar-border: rgba(0, 0, 0, 0.08);
+
+  --card-bg: #f9f9f9;
+  --card-hover: #f2f2f2;
+
+  --transition-speed: 0.2s;
+
+  --font-heading: 'Space Grotesk', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
 }
 
 [data-theme="dark"] {
-  /* Dark Theme Colors */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #141414;
-  --bg-tertiary: #1e1e1e;
-  
-  --text-primary: #f5f5f5;
-  --text-secondary: #a1a1aa;
-  --text-tertiary: #71717a;
-  
-  --border-color: #27272a;
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
-  
-  --accent-primary: #60a5fa;
-  --accent-secondary: #a78bfa;
-  --accent-gradient: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
-  
-  --navbar-bg: rgba(10, 10, 10, 0.8);
-  --navbar-border: rgba(255, 255, 255, 0.1);
-  
-  --card-bg: #141414;
-  --card-hover: #1e1e1e;
+  --bg-primary: #080808;
+  --bg-secondary: #111111;
+  --bg-tertiary: #1a1a1a;
+
+  --text-primary: #ededed;
+  --text-secondary: #999;
+  --text-tertiary: #555;
+
+  --border-color: #222222;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,0.7);
+
+  --accent: #6C63FF;
+  --accent-hover: #5B4FFF;
+  --accent-muted: rgba(108, 99, 255, 0.1);
+
+  --accent-primary: #6C63FF;
+  --accent-secondary: #5B4FFF;
+  --accent-gradient: linear-gradient(135deg, #6C63FF 0%, #9089ff 100%);
+
+  --navbar-bg: rgba(8, 8, 8, 0.9);
+  --navbar-border: rgba(255, 255, 255, 0.06);
+
+  --card-bg: #111111;
+  --card-hover: #181818;
 }
 
-/* Global Reset */
-* {
+/* ===================================
+   GLOBAL RESET
+   =================================== */
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+  font-family: var(--font-body);
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color var(--transition-speed), color var(--transition-speed);
+  transition: background-color 0.3s, color 0.3s;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
 }

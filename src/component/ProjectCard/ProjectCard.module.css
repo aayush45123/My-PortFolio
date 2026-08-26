@@ -399,15 +399,13 @@
 }
 
 .modalTitle {
-  font-size: 32px;
+  font-family: var(--font-heading);
+  font-size: 2rem;
   font-weight: 800;
   color: var(--text-primary);
   margin-bottom: 12px;
   line-height: 1.2;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -0.02em;
 }
 
 .projectDate {

@@ -19,13 +19,13 @@ const Hero = () => {
   // Typing Animation Logic
   useEffect(() => {
     const current = roles[index];
-    const speed = deleting ? 60 : 120;
+    const speed = deleting ? 50 : 100;
 
     const timeout = setTimeout(() => {
       setSubIndex((prev) => (deleting ? prev - 1 : prev + 1));
 
       if (!deleting && subIndex === current.length) {
-        setTimeout(() => setDeleting(true), 1000);
+        setTimeout(() => setDeleting(true), 1200);
       }
 
       if (deleting && subIndex === 0) {
@@ -47,46 +47,40 @@ const Hero = () => {
   return (
     <section className={styles.hero} id="home">
       <div className={styles.heroContainer}>
-        <div
-          className={`${styles.heroContent} ${isVisible ? styles.visible : ""}`}
-        >
-          {/* Greeting */}
-          <div className={styles.greeting}>
-            <span className={styles.greetingText}>Hello, I'm</span>
-          </div>
+        <div className={`${styles.heroContent} ${isVisible ? styles.visible : ""}`}>
+
+          {/* Editorial label */}
+          <div className={styles.sectionLabel}>Portfolio — 2025</div>
 
           {/* Name */}
           <h1 className={styles.heroTitle}>
             <span className={styles.firstName}>Aayush Bharda</span>
-            <span className={styles.lastName}>Developer</span>
+            <span className={styles.lastName}>Developer.</span>
           </h1>
 
           {/* Typing Subtitle */}
           <div className={styles.subtitleWrapper}>
             <h2 className={styles.heroSubtitle}>
-              <span className={styles.subtitleText}>
-                {roles[index].substring(0, subIndex)}
-              </span>
+              {roles[index].substring(0, subIndex)}
               <span className={styles.cursor}>|</span>
             </h2>
           </div>
 
           {/* Description */}
           <p className={styles.heroDescription}>
-            I craft exceptional digital experiences with modern technologies.
-            Specialized in building scalable web applications that make a
-            difference.
+            I build scalable web applications and embedded systems — focused on
+            clean code, sharp interfaces, and real-world impact.
           </p>
 
           {/* Buttons */}
           <div className={styles.ctaButtons}>
             <button className={styles.btnPrimary} onClick={scrollToProjects}>
               <span>View My Work</span>
-              <ArrowRight className={styles.btnIcon} size={20} />
+              <ArrowRight className={styles.btnIcon} size={18} />
             </button>
 
             <a href={resume} download className={styles.btnSecondary}>
-              <Download className={styles.btnIcon} size={20} />
+              <Download size={16} />
               <span>Download CV</span>
             </a>
           </div>
