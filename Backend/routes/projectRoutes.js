@@ -52,10 +52,10 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
-// GET all projects (sorted newest first)
+// GET all projects (sorted first uploaded first)
 router.get("/", async (req, res) => {
   try {
-    const projects = await Project.find().sort({ createdAt: -1 });
+    const projects = await Project.find().sort({ createdAt: 1 });
     res.json(projects);
   } catch (err) {
     console.error("Error fetching projects:", err);

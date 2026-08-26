@@ -62,10 +62,10 @@ router.post(
   }
 );
 
-// GET — All certificates (sorted newest first)
+// GET — All certificates (sorted first uploaded first)
 router.get("/", async (req, res) => {
   try {
-    const certs = await Certificate.find().sort({ createdAt: -1 });
+    const certs = await Certificate.find().sort({ createdAt: 1 });
     res.json(certs);
   } catch (err) {
     console.error("Error fetching certificates:", err);

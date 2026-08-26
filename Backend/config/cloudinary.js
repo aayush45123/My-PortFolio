@@ -1,23 +1,29 @@
 const cloudinary = require("cloudinary").v2;
 const streamifier = require("streamifier");
 
-// Configure Cloudinary from environment variables
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-  secure: true,
-});
+const getCloudinaryConfig = () => {
+  return {
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+    secure: true,
+  };
+};
+
+// Initial config
+cloudinary.config(getCloudinaryConfig());
 
 /**
  * Uploads a file buffer directly to Cloudinary using streams.
- * Eliminates the need to write temporary files to the local disk.
  *
  * @param {Buffer} buffer - File buffer from multer memoryStorage
  * @param {Object} options - Cloudinary upload options (folder, resource_type, etc.)
  * @returns {Promise<Object>} Cloudinary upload response object
  */
 const uploadToCloudinary = (buffer, options = {}) => {
+  // Ensure config is fresh
+  cloudinary.config(getCloudinaryConfig());
+
   return new Promise((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
@@ -44,6 +50,7 @@ const uploadToCloudinary = (buffer, options = {}) => {
  * @returns {Promise<Object>}
  */
 const deleteFromCloudinary = async (publicId, resourceType = "image") => {
+  cloudinary.config(getCloudinaryConfig());
   try {
     return await cloudinary.uploader.destroy(publicId, {
       resource_type: resourceType,

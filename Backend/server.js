@@ -9,7 +9,7 @@ const projectRoutes = require("./routes/projectRoutes");
 
 const app = express();
 
-// ✅ CORS (CORRECT + PRODUCTION SAFE)
+// ✅ CORS (PRODUCTION & LOCAL SAFE)
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://aayush45123.github.io"],
