@@ -1,5 +1,5 @@
 /* ===================================
-   PROFESSIONAL AMBIENT BACKDROP (No Grids / No Stock Photos)
+   DYNAMIC AURORA & CURSOR SPOTLIGHT
    =================================== */
 .bgContainer {
   position: fixed;
@@ -11,61 +11,146 @@
   overflow: hidden;
   background-color: var(--bg-primary);
   transition: background-color 0.3s ease;
+  --mouse-x: 50vw;
+  --mouse-y: 30vh;
 }
 
-/* Soft top atmospheric glow */
-.ambientGlowTop {
+/* Interactive Cursor Spotlight */
+.cursorSpotlight {
   position: absolute;
-  top: -15%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1200px;
-  height: 700px;
-  border-radius: 50%;
+  inset: 0;
   background: radial-gradient(
-    ellipse 60% 40% at 50% 30%,
-    rgba(99, 102, 241, 0.12) 0%,
-    rgba(79, 70, 229, 0.05) 50%,
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(99, 102, 241, 0.08),
+    transparent 70%
+  );
+  transition: background 0.15s ease-out;
+  pointer-events: none;
+}
+
+:root:not([data-theme="dark"]) .cursorSpotlight {
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(79, 70, 229, 0.05),
+    transparent 70%
+  );
+}
+
+/* Animated Aurora Orbs */
+.auroraOrb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.65;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Top Central Aurora */
+.orb1 {
+  top: -10%;
+  left: 25%;
+  width: 650px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.22) 0%,
+    rgba(147, 51, 234, 0.12) 60%,
+    transparent 80%
+  );
+  animation: floatOrb1 18s ease-in-out infinite alternate;
+}
+
+/* Right Indigo Glow */
+.orb2 {
+  top: 30%;
+  right: -10%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.16) 0%,
+    rgba(99, 102, 241, 0.08) 60%,
+    transparent 80%
+  );
+  animation: floatOrb2 22s ease-in-out infinite alternate;
+}
+
+/* Bottom Left Violet Accent */
+.orb3 {
+  bottom: -15%;
+  left: 5%;
+  width: 600px;
+  height: 500px;
+  background: radial-gradient(
+    circle,
+    rgba(168, 85, 247, 0.14) 0%,
+    rgba(99, 102, 241, 0.06) 60%,
+    transparent 80%
+  );
+  animation: floatOrb3 20s ease-in-out infinite alternate;
+}
+
+/* Light Theme Adjustments */
+:root:not([data-theme="dark"]) .orb1 {
+  background: radial-gradient(
+    circle,
+    rgba(79, 70, 229, 0.12) 0%,
+    rgba(147, 51, 234, 0.06) 60%,
     transparent 80%
   );
   filter: blur(80px);
-  pointer-events: none;
-  transition: opacity 0.4s ease;
 }
 
-/* Subtle corner accent glow */
-.ambientGlowBottom {
-  position: absolute;
-  bottom: -20%;
-  right: -10%;
-  width: 800px;
-  height: 600px;
-  border-radius: 50%;
+:root:not([data-theme="dark"]) .orb2 {
   background: radial-gradient(
     circle,
-    rgba(129, 140, 248, 0.06) 0%,
+    rgba(37, 99, 235, 0.08) 0%,
     transparent 70%
   );
-  filter: blur(90px);
-  pointer-events: none;
-  transition: opacity 0.4s ease;
 }
 
-/* Light Theme adjustments */
-:root:not([data-theme="dark"]) .ambientGlowTop {
-  background: radial-gradient(
-    ellipse 60% 40% at 50% 30%,
-    rgba(79, 70, 229, 0.08) 0%,
-    rgba(99, 102, 241, 0.03) 50%,
-    transparent 80%
-  );
-  filter: blur(70px);
-}
-
-:root:not([data-theme="dark"]) .ambientGlowBottom {
+:root:not([data-theme="dark"]) .orb3 {
   background: radial-gradient(
     circle,
-    rgba(79, 70, 229, 0.04) 0%,
+    rgba(147, 51, 234, 0.07) 0%,
     transparent 70%
   );
+}
+
+/* Organic Keyframe Animations */
+@keyframes floatOrb1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(120px, 60px) scale(1.15);
+  }
+  100% {
+    transform: translate(-60px, 40px) scale(0.95);
+  }
+}
+
+@keyframes floatOrb2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-100px, -80px) scale(1.2);
+  }
+  100% {
+    transform: translate(40px, 70px) scale(0.9);
+  }
+}
+
+@keyframes floatOrb3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(80px, -60px) scale(1.1);
+  }
+  100% {
+    transform: translate(-40px, 50px) scale(0.95);
+  }
 }
