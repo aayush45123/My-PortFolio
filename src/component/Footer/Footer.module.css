@@ -1,13 +1,14 @@
+/* ===================================
+   FOOTER — Sharp & Minimal
+   =================================== */
 .footerSection {
-  padding: 25px 20px;
-  background: var(--bg-secondary);
+  padding: 32px 24px;
+  background: var(--bg-primary);
   border-top: 1px solid var(--border-color);
-  animation: fadeIn 0.8s ease-out;
 }
 
-/* HORIZONTAL ROW */
 .footerRow {
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -15,58 +16,53 @@
   gap: 20px;
 }
 
-/* TEXT LEFT */
+/* Brand */
 .left h3 {
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 800;
   color: var(--text-primary);
+  letter-spacing: -0.02em;
 }
 
-/* ICONS CENTER */
+/* Socials */
 .center {
   display: flex;
-  gap: 16px;
+  gap: 10px;
 }
 
 .center a {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: var(--bg-tertiary);
+  width: 34px;
+  height: 34px;
+  border-radius: 4px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-primary);
-  transition: 0.3s;
+  color: var(--text-secondary);
+  transition: all 0.2s;
 }
 
 .center a:hover {
-  background: var(--accent-primary);
-  color: #fff;
-  transform: translateY(-4px);
+  background: var(--accent-muted);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
 }
 
-/* COPYRIGHT RIGHT */
+/* Copyright */
 .right {
+  font-family: var(--font-mono);
   color: var(--text-tertiary);
-  font-size: 14px;
+  font-size: 0.75rem;
 }
 
-/* RESPONSIVE */
-@media (max-width: 700px) {
+/* Responsive */
+@media (max-width: 600px) {
   .footerRow {
     flex-direction: column;
     text-align: center;
-    gap: 12px;
-  }
-}
-
-/* FADE ANIMATION */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+    gap: 16px;
   }
 }

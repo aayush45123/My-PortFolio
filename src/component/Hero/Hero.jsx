@@ -7,7 +7,7 @@ import resume from "../../assets/resume.pdf";
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
 
-  const roles = ["Full Stack Developer", "IoT Enthusiast"];
+  const roles = ["Full Stack Developer", "Data Analyst", "IoT Enthusiast"];
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [deleting, setDeleting] = useState(false);

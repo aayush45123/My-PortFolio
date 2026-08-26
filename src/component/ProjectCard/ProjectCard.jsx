@@ -31,26 +31,21 @@ const ProjectCard = ({ project }) => {
     if (!cardRef.current) return;
 
     const card = cardRef.current;
-    const rect = card.getBoundingClientRect();
+    const cardInner = card.querySelector(`.${styles.cardInner}`);
+    if (!cardInner) return;
 
+    const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -10;
-    const rotateY = ((x - centerX) / centerX) * 10;
+    const rotateX = ((y - centerY) / centerY) * -12;
+    const rotateY = ((x - centerX) / centerX) * 12;
 
-    const cardInner = card.querySelector(`.${styles.cardInner}`);
-    if (cardInner) {
-      cardInner.style.transform = `
-        perspective(1000px)
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        scale3d(1.02, 1.02, 1.02)
-      `;
-    }
+    cardInner.style.transition = "transform 0.08s ease-out";
+    cardInner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
 
     const shine = card.querySelector(`.${styles.shine}`);
     if (shine) {
@@ -59,39 +54,38 @@ const ProjectCard = ({ project }) => {
       shine.style.background = `
         radial-gradient(
           circle at ${xPercent}% ${yPercent}%,
-          rgba(255, 255, 255, 0.2) 0%,
-          transparent 80%
+          rgba(255, 255, 255, 0.15) 0%,
+          transparent 70%
         )
       `;
     }
   };
 
   const handleMouseLeave = () => {
+    if (!cardRef.current) return;
     const cardInner = cardRef.current.querySelector(`.${styles.cardInner}`);
     if (cardInner) {
-      cardInner.style.transform =
-        "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)";
+      cardInner.style.transition = "transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)";
+      cardInner.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
     }
   };
 
   const openModal = (e) => {
-    e.stopPropagation(); // Prevent event bubbling
+    e.stopPropagation();
     setShowModal(true);
   };
 
   const closeModal = (e) => {
-    if (e) e.stopPropagation(); // Prevent event bubbling
+    if (e) e.stopPropagation();
     setShowModal(false);
   };
 
   const handleOverlayClick = (e) => {
-    // Only close if clicking directly on overlay, not on modal content
     if (e.target === e.currentTarget) {
       closeModal(e);
     }
   };
 
-  // Truncate description to 2 lines
   const truncateText = (text, maxLength = 120) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
@@ -113,25 +107,29 @@ const ProjectCard = ({ project }) => {
             <div className={styles.projectOverlay}></div>
 
             <div className={styles.projectLinks}>
-              <a
-                href={project.liveLink}
-                className={styles.projectLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Live Demo"
-              >
-                <ExternalLink size={20} />
-              </a>
+              {project.liveLink && (
+                <a
+                  href={project.liveLink}
+                  className={styles.projectLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Live Demo"
+                >
+                  <ExternalLink size={18} />
+                </a>
+              )}
 
-              <a
-                href={project.githubLink}
-                className={styles.projectLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Source Code"
-              >
-                <Github size={20} />
-              </a>
+              {project.githubLink && (
+                <a
+                  href={project.githubLink}
+                  className={styles.projectLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Source Code"
+                >
+                  <Github size={18} />
+                </a>
+              )}
             </div>
           </div>
 
@@ -169,8 +167,8 @@ const ProjectCard = ({ project }) => {
         createPortal(
           <div className={styles.modalOverlay} onClick={handleOverlayClick}>
             <div className={styles.modalContent}>
-              <button className={styles.closeBtn} onClick={closeModal}>
-                <X size={24} />
+              <button className={styles.closeBtn} onClick={closeModal} aria-label="Close modal">
+                <X size={20} />
               </button>
 
               <div className={styles.modalGrid}>
@@ -182,24 +180,28 @@ const ProjectCard = ({ project }) => {
                     className={styles.modalImage}
                   />
                   <div className={styles.modalLinks}>
-                    <a
-                      href={project.liveLink}
-                      className={styles.modalLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ExternalLink size={18} />
-                      <span>Live Demo</span>
-                    </a>
-                    <a
-                      href={project.githubLink}
-                      className={styles.modalLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <Github size={18} />
-                      <span>Source Code</span>
-                    </a>
+                    {project.liveLink && (
+                      <a
+                        href={project.liveLink}
+                        className={styles.modalLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <ExternalLink size={16} />
+                        <span>Live Demo</span>
+                      </a>
+                    )}
+                    {project.githubLink && (
+                      <a
+                        href={project.githubLink}
+                        className={styles.modalLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Github size={16} />
+                        <span>Source Code</span>
+                      </a>
+                    )}
                   </div>
                 </div>
 
@@ -209,7 +211,7 @@ const ProjectCard = ({ project }) => {
                     <h2 className={styles.modalTitle}>{project.title}</h2>
                     {project.date && (
                       <div className={styles.projectDate}>
-                        <Calendar size={16} />
+                        <Calendar size={14} />
                         <span>{project.date}</span>
                       </div>
                     )}
@@ -218,7 +220,7 @@ const ProjectCard = ({ project }) => {
                   <div className={styles.modalBody}>
                     <div className={styles.section}>
                       <h4 className={styles.sectionTitle}>
-                        <Code size={18} />
+                        <Code size={16} />
                         About Project
                       </h4>
                       <p className={styles.modalDescription}>

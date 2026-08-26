@@ -1,51 +1,50 @@
 /* ===================================
-   3D PROJECT CARD - UNIFORM SIZE
+   PROJECT CARD — 3D Tilt with Integrated Border
    =================================== */
 .projectCard {
-  background: var(--card-bg);
-  border-radius: 0; /* Sharp corners */
-  border: 2px solid var(--border-color);
-  overflow: hidden;
-  transition: all var(--transition-speed);
-  position: relative;
-  transform-style: preserve-3d;
+  background: transparent;
+  border: none;
   perspective: 1000px;
-  height: 100%; /* Uniform height */
-  display: flex;
-  flex-direction: column;
-  isolation: isolate; /* Create new stacking context */
-}
-
-.cardInner {
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.1s ease-out;
   height: 100%;
   display: flex;
   flex-direction: column;
-  z-index: 2; /* Above shine effect */
-  pointer-events: auto; /* Ensure it receives events */
+  position: relative;
 }
 
-.projectCard:hover {
-  border-color: var(--accent-primary);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+.cardInner {
+  background: var(--card-bg);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.projectCard:hover .cardInner {
+  border-color: var(--accent);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
 }
 
 /* ===================================
-   PROJECT IMAGE - FIXED HEIGHT
+   IMAGE
    =================================== */
 .projectImage {
   width: 100%;
-  height: 240px; /* Fixed height for uniformity */
+  height: 220px;
   overflow: hidden;
   position: relative;
   background: var(--bg-tertiary);
-  transform: translateZ(50px);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0; /* Prevent shrinking */
+  flex-shrink: 0;
 }
 
 .projectImage img {
@@ -58,24 +57,21 @@
 }
 
 .projectCard:hover .projectImage img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .projectOverlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    rgba(0, 0, 0, 0.7) 100%
+    rgba(0, 0, 0, 0.6) 100%
   );
   opacity: 0;
-  transition: opacity var(--transition-speed);
+  transition: opacity 0.2s;
   z-index: 2;
-  pointer-events: none; /* Don't block hover on card */
+  pointer-events: none;
 }
 
 .projectCard:hover .projectOverlay {
@@ -84,13 +80,13 @@
 
 .projectLinks {
   position: absolute;
-  bottom: 16px;
+  bottom: 14px;
   left: 50%;
-  transform: translateX(-50%) translateZ(60px);
+  transform: translateX(-50%);
   display: flex;
-  gap: 12px;
+  gap: 10px;
   opacity: 0;
-  transition: opacity var(--transition-speed);
+  transition: opacity 0.2s, transform 0.2s;
   z-index: 4;
 }
 
@@ -102,155 +98,121 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 0; /* Sharp corners */
-  color: #000;
+  width: 38px;
+  height: 38px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-primary);
   text-decoration: none;
-  transition: all var(--transition-speed);
-  border: 2px solid transparent;
-}
-
-.projectLink svg {
-  width: 20px;
-  height: 20px;
-  color: #000;
+  transition: all 0.2s;
 }
 
 .projectLink:hover {
-  background: var(--accent-primary);
-  border-color: var(--accent-primary);
-  transform: translateY(-3px);
-}
-
-.projectLink:hover svg {
+  background: var(--accent);
+  border-color: var(--accent);
   color: #fff;
+  transform: translateY(-2px);
 }
 
 /* ===================================
-   PROJECT CONTENT - FIXED LAYOUT
+   CONTENT
    =================================== */
 .projectContent {
   padding: 24px;
-  transform: translateZ(30px);
-  position: relative;
   flex: 1;
   display: flex;
   flex-direction: column;
-  z-index: 3; /* Above image */
-  pointer-events: auto; /* Ensure clickable */
 }
 
 .projectHeader {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .projectTitle {
-  font-size: 22px;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 0;
   line-height: 1.3;
-  min-height: 60px; /* Fixed height for 2 lines */
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 
 .projectDescription {
-  font-size: 14px;
+  font-size: 0.88rem;
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 16px;
-  min-height: 66px; /* Fixed height for 3 lines */
-  max-height: 66px;
-  overflow: hidden;
+  min-height: 56px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ===================================
-   TECH STACK TAGS - LIMITED
+   TAGS
    =================================== */
 .techStack {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-  min-height: 32px; /* Reserve space for tags */
+  gap: 6px;
+  margin-bottom: 20px;
 }
 
 .techTag {
-  padding: 6px 14px;
-  background: var(--bg-secondary);
-  color: var(--text-tertiary);
-  border-radius: 0; /* Sharp corners */
-  font-size: 12px;
-  font-weight: 600;
+  padding: 4px 10px;
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
   border: 1px solid var(--border-color);
-  transition: all var(--transition-speed);
-  transform: translateZ(20px);
+  transition: all 0.2s;
   white-space: nowrap;
 }
 
 .projectCard:hover .techTag {
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* ===================================
-   SHOW MORE BUTTON
+   BUTTON
    =================================== */
 .showMoreBtn {
-  margin-top: auto; /* Push to bottom */
+  margin-top: auto;
   width: 100%;
-  padding: 12px 24px;
+  padding: 11px 20px;
   background: transparent;
-  color: var(--accent-primary);
-  border: 2px solid var(--accent-primary);
-  border-radius: 0; /* Sharp corners */
-  font-size: 14px;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-speed);
+  transition: all 0.2s;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.05em;
 }
 
 .showMoreBtn:hover {
-  background: var(--accent-primary);
+  background: var(--accent);
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 4px 14px rgba(91, 79, 255, 0.3);
 }
 
 /* ===================================
-   3D SHINE EFFECT
+   SHINE
    =================================== */
 .shine {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.1) 50%,
-    transparent 100%
-  );
-  opacity: 0;
-  transition: opacity var(--transition-speed);
+  inset: 0;
   pointer-events: none;
-  border-radius: 0;
-  z-index: 1; /* Below content */
-}
-
-.projectCard:hover .shine {
-  opacity: 1;
+  z-index: 3;
+  border-radius: 8px;
+  transition: opacity 0.2s;
 }
 
 /* ===================================
@@ -258,108 +220,93 @@
    =================================== */
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  z-index: 1000;
+  backdrop-filter: blur(10px);
+  z-index: 1100;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.25s ease-out;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .modalContent {
   background: var(--card-bg);
-  border: 2px solid var(--border-color);
-  border-radius: 0; /* Sharp corners */
-  max-width: 1200px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  max-width: 1050px;
   width: 100%;
-  max-height: 90vh;
+  max-height: 88vh;
   overflow-y: auto;
   position: relative;
-  animation: slideUp 0.3s ease-out;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.25s ease-out;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
 }
 
 @keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .closeBtn {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  background: var(--bg-secondary);
-  border: 2px solid var(--border-color);
-  border-radius: 0; /* Sharp corners */
-  color: var(--text-primary);
+  top: 16px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-secondary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all var(--transition-speed);
+  transition: all 0.2s;
   z-index: 10;
 }
 
 .closeBtn:hover {
-  background: var(--accent-primary);
+  background: var(--accent);
   color: #fff;
-  border-color: var(--accent-primary);
-  transform: rotate(90deg);
+  border-color: var(--accent);
 }
 
 /* ===================================
-   MODAL GRID LAYOUT
+   MODAL GRID
    =================================== */
 .modalGrid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
-  min-height: 500px;
+  min-height: 480px;
 }
 
-/* Left Side - Image */
 .modalImageSection {
-  background: var(--bg-secondary);
-  padding: 40px;
+  background: var(--bg-primary);
+  padding: 36px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  border-right: 2px solid var(--border-color);
+  gap: 20px;
+  border-right: 1px solid var(--border-color);
 }
 
 .modalImage {
   width: 100%;
-  height: 400px;
+  height: 320px;
   object-fit: cover;
-  border: 2px solid var(--border-color);
-  border-radius: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
 }
 
 .modalLinks {
   display: flex;
-  gap: 16px;
+  gap: 12px;
 }
 
 .modalLink {
@@ -368,79 +315,78 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  padding: 14px 20px;
-  background: var(--bg-primary);
-  border: 2px solid var(--border-color);
-  border-radius: 0;
+  padding: 12px 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
   color: var(--text-primary);
   text-decoration: none;
   font-weight: 600;
-  font-size: 14px;
-  transition: all var(--transition-speed);
+  font-size: 0.85rem;
+  transition: all 0.2s;
 }
 
 .modalLink:hover {
-  background: var(--accent-primary);
+  background: var(--accent);
   color: #fff;
-  border-color: var(--accent-primary);
-  transform: translateY(-2px);
+  border-color: var(--accent);
 }
 
-/* Right Side - Details */
 .modalDetailsSection {
-  padding: 40px;
+  padding: 36px;
   overflow-y: auto;
 }
 
 .modalHeader {
-  margin-bottom: 32px;
-  padding-bottom: 24px;
-  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .modalTitle {
   font-family: var(--font-heading);
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 800;
   color: var(--text-primary);
-  margin-bottom: 12px;
-  line-height: 1.2;
+  margin-bottom: 8px;
   letter-spacing: -0.02em;
 }
 
 .projectDate {
   display: flex;
   align-items: center;
-  gap: 8px;
-  color: var(--text-secondary);
-  font-size: 14px;
+  gap: 6px;
+  color: var(--text-tertiary);
+  font-size: 0.82rem;
+  font-family: var(--font-mono);
 }
 
 .modalBody {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
 .section {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .sectionTitle {
-  font-size: 18px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 8px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .modalDescription {
-  font-size: 15px;
+  font-size: 0.92rem;
   color: var(--text-secondary);
   line-height: 1.7;
 }
@@ -451,161 +397,61 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .featuresList li {
-  font-size: 15px;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  line-height: 1.6;
-  padding-left: 24px;
+  line-height: 1.5;
+  padding-left: 20px;
   position: relative;
 }
 
 .featuresList li::before {
-  content: "▸";
+  content: "→";
   position: absolute;
   left: 0;
-  color: var(--accent-primary);
-  font-weight: bold;
-  font-size: 18px;
+  color: var(--accent);
+  font-size: 0.9rem;
 }
 
 .modalTechStack {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 8px;
 }
 
 .modalTechTag {
-  padding: 8px 16px;
-  background: var(--bg-secondary);
+  padding: 6px 12px;
+  background: var(--bg-primary);
   color: var(--text-primary);
-  border: 2px solid var(--border-color);
-  border-radius: 0;
-  font-size: 13px;
-  font-weight: 600;
-  transition: all var(--transition-speed);
-}
-
-.modalTechTag:hover {
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-  transform: translateY(-2px);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
 /* ===================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
    =================================== */
-@media (max-width: 968px) {
+@media (max-width: 900px) {
   .modalGrid {
     grid-template-columns: 1fr;
   }
 
   .modalImageSection {
     border-right: none;
-    border-bottom: 2px solid var(--border-color);
-    padding: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding: 24px;
   }
 
   .modalImage {
-    height: 300px;
+    height: 240px;
   }
 
   .modalDetailsSection {
-    padding: 30px;
+    padding: 24px;
   }
-
-  .modalTitle {
-    font-size: 28px;
-  }
-}
-
-@media (max-width: 640px) {
-  .projectImage {
-    height: 200px;
-  }
-
-  .projectContent {
-    padding: 20px;
-  }
-
-  .projectTitle {
-    font-size: 20px;
-    min-height: 54px;
-  }
-
-  .projectDescription {
-    font-size: 13px;
-    min-height: 60px;
-    max-height: 60px;
-  }
-
-  .modalOverlay {
-    padding: 10px;
-  }
-
-  .modalContent {
-    max-height: 95vh;
-  }
-
-  .modalImageSection {
-    padding: 20px;
-  }
-
-  .modalImage {
-    height: 250px;
-  }
-
-  .modalDetailsSection {
-    padding: 20px;
-  }
-
-  .modalTitle {
-    font-size: 24px;
-  }
-
-  .modalLinks {
-    flex-direction: column;
-  }
-
-  .closeBtn {
-    top: 10px;
-    right: 10px;
-    width: 36px;
-    height: 36px;
-  }
-}
-
-/* ===================================
-   CUSTOM SCROLLBAR FOR MODAL
-   =================================== */
-.modalContent::-webkit-scrollbar {
-  width: 8px;
-}
-
-.modalContent::-webkit-scrollbar-track {
-  background: var(--bg-tertiary);
-}
-
-.modalContent::-webkit-scrollbar-thumb {
-  background: var(--accent-primary);
-  border-radius: 0;
-}
-
-.modalContent::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-secondary);
-}
-
-.modalDetailsSection::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modalDetailsSection::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.modalDetailsSection::-webkit-scrollbar-thumb {
-  background: var(--border-color);
-  border-radius: 0;
 }
