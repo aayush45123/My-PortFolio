@@ -5,29 +5,26 @@ export default defineConfig(({ mode }) => ({
   base: "/",
   plugins: [react()],
 
-  // Define API URL directly (so .env is not needed anymore)
+  // Define API URL for production build
   define: {
     "import.meta.env.VITE_API_URL": JSON.stringify(
-      "https://my-portfolio-wxe8.onrender.com"
+      mode === "production" ? "https://my-portfolio-wxe8.onrender.com" : ""
     ),
   },
 
-  // Proxy only in development
+  // Local development proxy to backend
   server: {
-    proxy:
-      mode === "development"
-        ? {
-            "/api": {
-              target: "http://localhost:5000",
-              changeOrigin: true,
-              secure: false,
-            },
-            "/uploads": {
-              target: "http://localhost:5000",
-              changeOrigin: true,
-              secure: false,
-            },
-          }
-        : undefined,
+    proxy: {
+      "/api": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+        secure: false,
+      },
+      "/uploads": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
 }));
