@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig(({ mode }) => ({
-  base: "/My-PortFolio/", // Required for GitHub Pages
+  base: "/",
   plugins: [react()],
 
   // Define API URL directly (so .env is not needed anymore)
