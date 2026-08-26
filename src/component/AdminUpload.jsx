@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "../api/axios"; // ✅ USE AXIOS INSTANCE
+import api from "../api/axios";
 
 const AdminUpload = () => {
   const [activeTab, setActiveTab] = useState("certificate");
@@ -9,6 +9,7 @@ const AdminUpload = () => {
   const [certType, setCertType] = useState("pdf");
   const [certFile, setCertFile] = useState(null);
   const [certThumbnail, setCertThumbnail] = useState(null);
+  const [certLoading, setCertLoading] = useState(false);
   const [certMessage, setCertMessage] = useState("");
 
   // Project states
@@ -18,6 +19,7 @@ const AdminUpload = () => {
   const [projGithub, setProjGithub] = useState("");
   const [projLive, setProjLive] = useState("");
   const [projImage, setProjImage] = useState(null);
+  const [projLoading, setProjLoading] = useState(false);
   const [projMessage, setProjMessage] = useState("");
 
   // Upload certificate
@@ -35,23 +37,25 @@ const AdminUpload = () => {
     formData.append("file", certFile);
     formData.append("thumbnail", certThumbnail);
 
+    setCertLoading(true);
+    setCertMessage("Uploading to Cloudinary...");
+
     try {
       await api.post("/api/certificates", formData);
-
-      setCertMessage("Certificate uploaded successfully!");
+      setCertMessage("Certificate uploaded to Cloudinary successfully!");
       setCertTitle("");
       setCertFile(null);
       setCertThumbnail(null);
     } catch (err) {
       console.error(err);
-      setCertMessage("Certificate upload failed!");
+      setCertMessage("Certificate upload failed: " + (err.response?.data?.error || err.message));
+    } finally {
+      setCertLoading(false);
     }
   };
 
   // Upload project
   const uploadProject = async (e) => {
-    console.log("API BASE URL:", api.defaults.baseURL);
-
     e.preventDefault();
 
     if (!projTitle || !projImage) {
@@ -67,10 +71,12 @@ const AdminUpload = () => {
     formData.append("liveURL", projLive);
     formData.append("image", projImage);
 
+    setProjLoading(true);
+    setProjMessage("Uploading to Cloudinary...");
+
     try {
       await api.post("/api/projects", formData);
-
-      setProjMessage("Project uploaded successfully!");
+      setProjMessage("Project uploaded to Cloudinary successfully!");
       setProjTitle("");
       setProjDesc("");
       setProjTechStack("");
@@ -79,7 +85,9 @@ const AdminUpload = () => {
       setProjImage(null);
     } catch (err) {
       console.error(err);
-      setProjMessage("Project upload failed!");
+      setProjMessage("Project upload failed: " + (err.response?.data?.error || err.message));
+    } finally {
+      setProjLoading(false);
     }
   };
 
@@ -110,6 +118,8 @@ const AdminUpload = () => {
             style={styles.input}
             value={certTitle}
             onChange={(e) => setCertTitle(e.target.value)}
+            disabled={certLoading}
+            placeholder="e.g. Meta Frontend Developer"
           />
 
           <label style={styles.label}>Certificate Type</label>
@@ -117,27 +127,31 @@ const AdminUpload = () => {
             style={styles.input}
             value={certType}
             onChange={(e) => setCertType(e.target.value)}
+            disabled={certLoading}
           >
             <option value="pdf">PDF</option>
             <option value="image">Image</option>
           </select>
 
-          <label style={styles.label}>Certificate File</label>
+          <label style={styles.label}>Certificate File (PDF or Image)</label>
           <input
             type="file"
             style={styles.input}
             onChange={(e) => setCertFile(e.target.files[0])}
+            disabled={certLoading}
           />
 
           <label style={styles.label}>Thumbnail Image</label>
           <input
             type="file"
             style={styles.input}
+            accept="image/*"
             onChange={(e) => setCertThumbnail(e.target.files[0])}
+            disabled={certLoading}
           />
 
-          <button type="submit" style={styles.button}>
-            Upload Certificate
+          <button type="submit" style={styles.button} disabled={certLoading}>
+            {certLoading ? "Uploading to Cloudinary..." : "Upload Certificate"}
           </button>
           <p style={styles.msg}>{certMessage}</p>
         </form>
@@ -150,6 +164,8 @@ const AdminUpload = () => {
             style={styles.input}
             value={projTitle}
             onChange={(e) => setProjTitle(e.target.value)}
+            disabled={projLoading}
+            placeholder="e.g. E-Commerce Platform"
           />
 
           <label style={styles.label}>Description</label>
@@ -157,6 +173,8 @@ const AdminUpload = () => {
             style={styles.textarea}
             value={projDesc}
             onChange={(e) => setProjDesc(e.target.value)}
+            disabled={projLoading}
+            placeholder="Describe the project..."
           />
 
           <label style={styles.label}>Tech Stack (comma separated)</label>
@@ -164,6 +182,8 @@ const AdminUpload = () => {
             style={styles.input}
             value={projTechStack}
             onChange={(e) => setProjTechStack(e.target.value)}
+            disabled={projLoading}
+            placeholder="React, Node.js, MongoDB"
           />
 
           <label style={styles.label}>GitHub URL</label>
@@ -171,6 +191,8 @@ const AdminUpload = () => {
             style={styles.input}
             value={projGithub}
             onChange={(e) => setProjGithub(e.target.value)}
+            disabled={projLoading}
+            placeholder="https://github.com/..."
           />
 
           <label style={styles.label}>Live URL</label>
@@ -178,17 +200,21 @@ const AdminUpload = () => {
             style={styles.input}
             value={projLive}
             onChange={(e) => setProjLive(e.target.value)}
+            disabled={projLoading}
+            placeholder="https://..."
           />
 
           <label style={styles.label}>Project Image</label>
           <input
             type="file"
             style={styles.input}
+            accept="image/*"
             onChange={(e) => setProjImage(e.target.files[0])}
+            disabled={projLoading}
           />
 
-          <button type="submit" style={styles.button}>
-            Upload Project
+          <button type="submit" style={styles.button} disabled={projLoading}>
+            {projLoading ? "Uploading to Cloudinary..." : "Upload Project"}
           </button>
           <p style={styles.msg}>{projMessage}</p>
         </form>
@@ -201,58 +227,74 @@ const styles = {
   container: {
     padding: "30px",
     maxWidth: "600px",
-    margin: "0 auto",
-    background: "#1b1b1b",
-    borderRadius: "12px",
-    color: "#fff",
+    margin: "100px auto 40px",
+    background: "var(--card-bg, #111)",
+    borderRadius: "8px",
+    border: "1px solid var(--border-color, #222)",
+    color: "var(--text-primary, #fff)",
   },
-  heading: { textAlign: "center", marginBottom: "20px" },
+  heading: { textAlign: "center", marginBottom: "20px", fontFamily: "var(--font-heading)" },
   tabs: {
     display: "flex",
     justifyContent: "center",
-    gap: "20px",
-    marginBottom: "20px",
+    gap: "16px",
+    marginBottom: "24px",
   },
   tab: {
     padding: "10px 20px",
-    background: "#333",
-    borderRadius: "8px",
+    background: "var(--bg-secondary, #222)",
+    border: "1px solid var(--border-color, #333)",
+    borderRadius: "4px",
     cursor: "pointer",
-    color: "#aaa",
+    color: "var(--text-secondary, #aaa)",
+    fontFamily: "var(--font-body)",
+    fontWeight: "500",
   },
   activeTab: {
     padding: "10px 20px",
-    background: "#007bff",
-    borderRadius: "8px",
+    background: "var(--accent, #6C63FF)",
+    border: "1px solid var(--accent, #6C63FF)",
+    borderRadius: "4px",
     cursor: "pointer",
     color: "#fff",
+    fontFamily: "var(--font-body)",
+    fontWeight: "600",
   },
-  form: { display: "flex", flexDirection: "column", gap: "12px" },
+  form: { display: "flex", flexDirection: "column", gap: "14px" },
   input: {
-    padding: "10px",
-    borderRadius: "8px",
-    border: "1px solid #444",
-    background: "#222",
-    color: "#fff",
+    padding: "12px",
+    borderRadius: "4px",
+    border: "1px solid var(--border-color, #333)",
+    background: "var(--bg-primary, #0a0a0a)",
+    color: "var(--text-primary, #fff)",
+    fontFamily: "var(--font-body)",
+    fontSize: "14px",
   },
   textarea: {
-    padding: "10px",
-    borderRadius: "8px",
-    border: "1px solid #444",
-    background: "#222",
-    minHeight: "80px",
-    color: "#fff",
-  },
-  label: { fontSize: "14px", fontWeight: "600" },
-  button: {
     padding: "12px",
-    background: "#007bff",
-    borderRadius: "8px",
+    borderRadius: "4px",
+    border: "1px solid var(--border-color, #333)",
+    background: "var(--bg-primary, #0a0a0a)",
+    minHeight: "90px",
+    color: "var(--text-primary, #fff)",
+    fontFamily: "var(--font-body)",
+    fontSize: "14px",
+  },
+  label: { fontSize: "12px", fontWeight: "600", color: "var(--text-tertiary, #888)", fontFamily: "var(--font-mono)", textTransform: "uppercase", letterSpacing: "0.08em" },
+  button: {
+    padding: "13px",
+    background: "var(--accent, #6C63FF)",
+    borderRadius: "4px",
     border: "none",
     cursor: "pointer",
     color: "#fff",
+    fontWeight: "600",
+    fontFamily: "var(--font-body)",
+    fontSize: "15px",
+    marginTop: "8px",
+    transition: "opacity 0.2s",
   },
-  msg: { textAlign: "center", marginTop: "10px" },
+  msg: { textAlign: "center", marginTop: "10px", fontSize: "14px", color: "var(--accent, #6C63FF)" },
 };
 
 export default AdminUpload;

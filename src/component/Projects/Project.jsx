@@ -3,6 +3,15 @@ import styles from "./Project.module.css";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { API_BASE } from "../../api/axios";
 
+// Helper to support both Cloudinary full URLs and legacy local relative URLs
+const resolveMediaUrl = (url) => {
+  if (!url) return "";
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  return `${API_BASE}${url}`;
+};
+
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [showAll, setShowAll] = useState(false);
@@ -10,7 +19,11 @@ const Projects = () => {
   useEffect(() => {
     fetch(`${API_BASE}/api/projects`)
       .then((res) => res.json())
-      .then((data) => setProjects(data))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setProjects(data);
+        }
+      })
       .catch((err) => console.log("Error fetching projects:", err));
   }, []);
 
@@ -35,8 +48,8 @@ const Projects = () => {
               project={{
                 title: project.title,
                 description: project.description,
-                image: `${API_BASE}${project.imageURL}`,
-                tags: project.techStack,
+                image: resolveMediaUrl(project.imageURL),
+                tags: project.techStack || [],
                 liveLink: project.liveURL,
                 githubLink: project.githubURL,
               }}

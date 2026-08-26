@@ -2,6 +2,15 @@ import React, { useState, useEffect } from "react";
 import styles from "./Certifications.module.css";
 import { API_BASE } from "../../api/axios";
 
+// Helper to support both Cloudinary full URLs and legacy local relative URLs
+const resolveMediaUrl = (url) => {
+  if (!url) return "";
+  if (url.startsWith("http://") || url.startsWith("https://")) {
+    return url;
+  }
+  return `${API_BASE}${url}`;
+};
+
 const Certifications = () => {
   const [certifications, setCertifications] = useState([]);
   const [showAll, setShowAll] = useState(false);
@@ -9,7 +18,11 @@ const Certifications = () => {
   useEffect(() => {
     fetch(`${API_BASE}/api/certificates`)
       .then((res) => res.json())
-      .then((data) => setCertifications(data))
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setCertifications(data);
+        }
+      })
       .catch((err) => console.log("Error fetching certificates:", err));
   }, []);
 
@@ -33,13 +46,13 @@ const Certifications = () => {
               className={styles.certCard}
               onClick={() =>
                 window.open(
-                  `${API_BASE}${cert.fileURL}`,
+                  resolveMediaUrl(cert.fileURL),
                   "_blank"
                 )
               }
             >
               <img
-                src={`${API_BASE}${cert.thumbnailURL}`}
+                src={resolveMediaUrl(cert.thumbnailURL)}
                 alt={cert.title}
                 className={styles.certThumbnail}
               />
