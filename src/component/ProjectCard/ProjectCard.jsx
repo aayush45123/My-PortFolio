@@ -41,11 +41,12 @@ const ProjectCard = ({ project }) => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -12;
-    const rotateY = ((x - centerX) / centerX) * 12;
+    // Subtle, gentle tilt
+    const rotateX = ((y - centerY) / centerY) * -4;
+    const rotateY = ((x - centerX) / centerX) * 4;
 
     cardInner.style.transition = "transform 0.08s ease-out";
-    cardInner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    cardInner.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
 
     const shine = card.querySelector(`.${styles.shine}`);
     if (shine) {
@@ -54,8 +55,8 @@ const ProjectCard = ({ project }) => {
       shine.style.background = `
         radial-gradient(
           circle at ${xPercent}% ${yPercent}%,
-          rgba(255, 255, 255, 0.15) 0%,
-          transparent 70%
+          rgba(255, 255, 255, 0.08) 0%,
+          transparent 60%
         )
       `;
     }
@@ -66,7 +67,7 @@ const ProjectCard = ({ project }) => {
     const cardInner = cardRef.current.querySelector(`.${styles.cardInner}`);
     if (cardInner) {
       cardInner.style.transition = "transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)";
-      cardInner.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)";
+      cardInner.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)";
     }
   };
 
