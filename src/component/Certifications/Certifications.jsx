@@ -14,6 +14,7 @@ const resolveMediaUrl = (url) => {
 const Certifications = () => {
   const [certifications, setCertifications] = useState([]);
   const [showAll, setShowAll] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(`${API_BASE}/api/certificates`)
@@ -23,7 +24,8 @@ const Certifications = () => {
           setCertifications(data);
         }
       })
-      .catch((err) => console.log("Error fetching certificates:", err));
+      .catch((err) => console.log("Error fetching certificates:", err))
+      .finally(() => setLoading(false));
   }, []);
 
   const visibleCerts = showAll ? certifications : certifications.slice(0, 4);
@@ -39,36 +41,50 @@ const Certifications = () => {
           </p>
         </div>
 
-        <div className={styles.certGrid}>
-          {visibleCerts.map((cert) => (
-            <div
-              key={cert._id}
-              className={styles.certCard}
-              onClick={() =>
-                window.open(
-                  resolveMediaUrl(cert.fileURL),
-                  "_blank"
-                )
-              }
-            >
-              <img
-                src={resolveMediaUrl(cert.thumbnailURL)}
-                alt={cert.title}
-                className={styles.certThumbnail}
-              />
-              <p className={styles.certTitle}>{cert.title}</p>
+        {loading ? (
+          <p style={{ color: "var(--text-tertiary)", textAlign: "center", padding: "40px 0", fontFamily: "var(--font-mono)", fontSize: "0.9rem" }}>
+            Loading certifications...
+          </p>
+        ) : certifications.length === 0 ? (
+          <p style={{ color: "var(--text-tertiary)", textAlign: "center", padding: "40px 0", fontFamily: "var(--font-mono)", fontSize: "0.9rem" }}>
+            No certificates added yet. Upload new certificates via /admin.
+          </p>
+        ) : (
+          <>
+            <div className={styles.certGrid}>
+              {visibleCerts.map((cert) => (
+                <div
+                  key={cert._id}
+                  className={styles.certCard}
+                  onClick={() =>
+                    window.open(
+                      resolveMediaUrl(cert.fileURL),
+                      "_blank"
+                    )
+                  }
+                >
+                  <img
+                    src={resolveMediaUrl(cert.thumbnailURL)}
+                    alt={cert.title}
+                    className={styles.certThumbnail}
+                  />
+                  <p className={styles.certTitle}>{cert.title}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        <div className={styles.buttonWrapper}>
-          <button
-            className={styles.viewBtn}
-            onClick={() => setShowAll(!showAll)}
-          >
-            {showAll ? "View Less" : "View All"}
-          </button>
-        </div>
+            {certifications.length > 4 && (
+              <div className={styles.buttonWrapper}>
+                <button
+                  className={styles.viewBtn}
+                  onClick={() => setShowAll(!showAll)}
+                >
+                  {showAll ? "View Less" : "View All"}
+                </button>
+              </div>
+            )}
+          </>
+        )}
       </div>
     </section>
   );
