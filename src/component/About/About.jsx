@@ -1,9 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./About.module.css";
 import Me from "../../assets/me.jpg";
 import { ArrowDownRight } from "lucide-react";
+import { API_BASE } from "../../api/axios";
 
 const About = () => {
+  const [projectCount, setProjectCount] = useState(null);
+  const [certCount, setCertCount] = useState(null);
+
+  useEffect(() => {
+    fetch(`${API_BASE}/api/projects`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) setProjectCount(data.length);
+      })
+      .catch(() => setProjectCount(10));
+
+    fetch(`${API_BASE}/api/certificates`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data)) setCertCount(data.length);
+      })
+      .catch(() => setCertCount(10));
+  }, []);
+
   const scrollToContact = (e) => {
     e.preventDefault();
     const section = document.getElementById("contact");
@@ -34,11 +54,15 @@ const About = () => {
               </div>
               <div className={styles.factRow}>
                 <span className={styles.factKey}>EDUCATION</span>
-                <span className={styles.factVal}>Computer Science / IoT</span>
+                <span className={styles.factVal}>B.Tech AI-DS · 2023–2027</span>
               </div>
               <div className={styles.factRow}>
                 <span className={styles.factKey}>PRIMARY STACK</span>
                 <span className={styles.factVal}>React, Node, SQL, C++</span>
+              </div>
+              <div className={styles.factRow}>
+                <span className={styles.factKey}>LOOKING FOR</span>
+                <span className={styles.factVal}>SE / Full-Stack Internships</span>
               </div>
             </div>
           </div>
@@ -57,18 +81,22 @@ const About = () => {
               My development philosophy centers on write-once maintainability, performant queries, and minimal, distraction-free interfaces that solve real-world problems.
             </p>
 
-            {/* Metrics Ledger */}
+            {/* Metrics Ledger — dynamic counts */}
             <div className={styles.metricsLedger}>
               <div className={styles.metricItem}>
-                <span className={styles.metricNumber}>02+</span>
-                <span className={styles.metricLabel}>Years Experience</span>
+                <span className={styles.metricNumber}>
+                  {projectCount !== null ? `${projectCount}+` : "—"}
+                </span>
+                <span className={styles.metricLabel}>Projects Built</span>
               </div>
               <div className={styles.metricItem}>
-                <span className={styles.metricNumber}>10+</span>
-                <span className={styles.metricLabel}>Shipped Projects</span>
+                <span className={styles.metricNumber}>15+</span>
+                <span className={styles.metricLabel}>Technologies</span>
               </div>
               <div className={styles.metricItem}>
-                <span className={styles.metricNumber}>10+</span>
+                <span className={styles.metricNumber}>
+                  {certCount !== null ? `${certCount}+` : "—"}
+                </span>
                 <span className={styles.metricLabel}>Certifications</span>
               </div>
             </div>

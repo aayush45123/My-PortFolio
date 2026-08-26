@@ -56,13 +56,14 @@
 }
 
 .navLink:hover {
-  color: var(--text-primary);
-  background: var(--bg-secondary);
+  color: var(--accent-amber);
+  background: var(--accent-amber-dim);
 }
 
 .navLink.active {
-  color: var(--text-primary);
+  color: var(--accent-amber);
   font-weight: 700;
+  box-shadow: inset 0 -2px 0 var(--accent-amber);
 }
 
 /* Actions */
@@ -123,8 +124,13 @@
 }
 
 .mobileLink:hover {
-  color: var(--text-primary);
-  background: var(--bg-secondary);
+  color: var(--accent-amber);
+  background: var(--accent-amber-dim);
+}
+
+.mobileLink.active {
+  color: var(--accent-amber);
+  font-weight: 700;
 }
 
 /* Responsive */

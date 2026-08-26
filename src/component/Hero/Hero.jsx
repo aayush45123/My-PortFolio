@@ -38,14 +38,14 @@ const Hero = () => {
               Aayush<br />Bharda
             </h1>
             <div className={styles.titleRule} />
-            <p className={styles.tagline}>Developer. Analyst. Builder.</p>
+            <p className={styles.tagline}>B.Tech in AI-DS · Full-Stack Developer · Data Analyst</p>
           </div>
 
           {/* Right Column — Bio + Actions */}
           <div className={styles.contentCol}>
             <div className={styles.contentInner}>
               <p className={styles.heroBio}>
-                I engineer high-performance web platforms, analytical data pipelines, and embedded IoT architectures — focused on clean code, minimal interfaces, and production-grade reliability.
+                Full-Stack Developer building scalable web applications, data-driven systems, and practical AI products.
               </p>
 
               {/* Metadata Grid */}
@@ -65,6 +65,10 @@ const Hero = () => {
                 <div className={styles.metaItem}>
                   <span className={styles.metaKey}>FOCUS</span>
                   <span className={styles.metaVal}>React · Node · SQL · C++</span>
+                </div>
+                <div className={styles.metaItem} style={{gridColumn: '1 / -1'}}>
+                  <span className={styles.metaKey}>LOOKING FOR</span>
+                  <span className={styles.metaVal}>SE / Full-Stack Internships · 2025–26</span>
                 </div>
               </div>
 

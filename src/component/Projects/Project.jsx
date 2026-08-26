@@ -29,7 +29,7 @@ const Projects = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  const visibleProjects = showAll ? projects : projects.slice(0, 6);
+  const visibleProjects = showAll ? projects : projects.slice(0, 4);
 
   return (
     <section className={styles.projectsSection} id="projects">
@@ -65,7 +65,7 @@ const Projects = () => {
               ))}
             </div>
 
-            {projects.length > 6 && (
+            {projects.length > 4 && (
               <div className={styles.viewAllWrapper}>
                 <button
                   className={styles.viewAllBtn}

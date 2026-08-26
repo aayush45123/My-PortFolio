@@ -34,6 +34,10 @@
   --accent-secondary: #2e2a20;
   --accent-gradient: none;
 
+  --accent-amber: #C9A66B;
+  --accent-amber-hover: #D4B278;
+  --accent-amber-dim: rgba(201, 166, 107, 0.15);
+
   --navbar-bg: rgba(225, 218, 202, 0.95);
   --navbar-border: #b8ae9e;
 
@@ -73,6 +77,10 @@
   --accent-primary: #e2dace;
   --accent-secondary: #cdc5b8;
   --accent-gradient: none;
+
+  --accent-amber: #C9A66B;
+  --accent-amber-hover: #D4B278;
+  --accent-amber-dim: rgba(201, 166, 107, 0.12);
 
   --navbar-bg: rgba(22, 19, 13, 0.96);
   --navbar-border: #302b22;

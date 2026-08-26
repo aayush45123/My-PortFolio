@@ -92,13 +92,13 @@ const ProjectCard = ({ project }) => {
           </p>
 
           <div className={styles.techStack}>
-            {project.tags.slice(0, 4).map((tag, index) => (
+            {project.tags.slice(0, 5).map((tag, index) => (
               <span key={index} className={styles.techTag}>
                 {tag}
               </span>
             ))}
-            {project.tags.length > 4 && (
-              <span className={styles.techTag}>+{project.tags.length - 4}</span>
+            {project.tags.length > 5 && (
+              <span className={styles.techTag}>+{project.tags.length - 5}</span>
             )}
           </div>
 

@@ -41,7 +41,7 @@ const Skills = () => {
     },
     {
       index: "05",
-      category: "Core CS",
+      category: "CS Fundamentals",
       skills: [
         "Data Structures & Algorithms",
         "Object-Oriented Programming",
@@ -52,7 +52,7 @@ const Skills = () => {
     },
     {
       index: "06",
-      category: "Tools & Analytics",
+      category: "Tools",
       skills: ["Git", "Docker", "Postman", "VS Code", "Power BI"],
     },
   ];

@@ -242,8 +242,9 @@
 }
 
 .btnSecondary:hover {
-  border-color: var(--text-primary);
-  background: var(--bg-secondary);
+  border-color: var(--accent-amber);
+  color: var(--accent-amber);
+  background: var(--accent-amber-dim);
 }
 
 .dockArea {

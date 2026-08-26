@@ -33,6 +33,7 @@
 .projectCard:hover {
   transform: translateY(-4px) rotate(-0.3deg);
   box-shadow: var(--shadow-page);
+  border-color: var(--accent-amber);
 }
 
 .projectCard:hover::after {
@@ -169,9 +170,9 @@
 }
 
 .showMoreBtn:hover {
-  background: var(--text-primary);
-  color: var(--bg-primary);
-  border-color: var(--text-primary);
+  background: var(--accent-amber);
+  color: #18150d;
+  border-color: var(--accent-amber);
 }
 
 /* ===================================
@@ -267,9 +268,9 @@
 }
 
 .modalActionBtn:hover {
-  background: var(--text-primary);
-  color: var(--bg-primary);
-  border-color: var(--text-primary);
+  background: var(--accent-amber);
+  color: #18150d;
+  border-color: var(--accent-amber);
 }
 
 .modalDetailsSection {

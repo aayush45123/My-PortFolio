@@ -1,77 +1,108 @@
 /* ===================================
-   FOOTER — MONOCHROME EDITORIAL
+   FOOTER — EDITORIAL MINIMAL
    =================================== */
 
 .footerSection {
-  padding: 36px 24px;
-  background: var(--bg-primary);
-  border-top: 1px solid var(--border-color);
+  border-top: 2px solid var(--border-strong);
+  background: var(--bg-secondary);
+  padding: 48px 0 28px;
 }
 
-.footerRow {
+.footerInner {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 40px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+  flex-direction: column;
+  gap: 32px;
 }
 
-.left h3 {
+/* Brand */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.brandName {
   font-family: var(--font-heading);
-  font-size: 1rem;
+  font-size: 1.4rem;
   font-weight: 800;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
-.center {
-  display: flex;
-  gap: 8px;
-}
-
-.center a {
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-primary);
-  transition: all 0.2s;
-}
-
-.center a:hover {
-  border-color: var(--text-primary);
-  background: var(--text-primary);
-  color: var(--bg-primary);
-}
-
-.right {
+.brandTagline {
   font-family: var(--font-mono);
-  color: var(--text-tertiary);
   font-size: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  color: var(--text-tertiary);
+  letter-spacing: 0.08em;
 }
 
-.adminLink {
-  color: var(--text-tertiary);
+/* Social row */
+.socialRow {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.75rem;
+  letter-spacing: 0.04em;
   transition: color 0.2s;
 }
 
+.socialLink:hover {
+  color: var(--accent-amber);
+}
+
+/* Bottom row */
+.bottomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.copyright {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.04em;
+}
+
+.adminLink {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  opacity: 0.5;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
 .adminLink:hover {
-  color: var(--text-primary);
+  opacity: 1;
+  color: var(--accent-amber);
 }
 
 @media (max-width: 600px) {
-  .footerRow {
+  .footerInner {
+    padding: 0 20px;
+  }
+
+  .bottomRow {
     flex-direction: column;
-    text-align: center;
-    gap: 16px;
+    align-items: flex-start;
   }
 }
