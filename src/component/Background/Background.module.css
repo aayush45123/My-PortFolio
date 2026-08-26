@@ -1,5 +1,5 @@
 /* ===================================
-   WORKSPACE AESTHETIC BACKGROUND
+   PROFESSIONAL AMBIENT BACKDROP (No Grids / No Stock Photos)
    =================================== */
 .bgContainer {
   position: fixed;
@@ -9,55 +9,63 @@
   pointer-events: none;
   z-index: -1;
   overflow: hidden;
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease;
 }
 
-.bgLayer {
+/* Soft top atmospheric glow */
+.ambientGlowTop {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: top right;
-  background-repeat: no-repeat;
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: opacity;
-}
-
-/* Light Theme: default */
-.lightLayer {
-  opacity: 1;
-}
-
-.darkLayer {
-  opacity: 0;
-}
-
-/* Dark Theme Toggle */
-[data-theme="dark"] .lightLayer {
-  opacity: 0;
-}
-
-[data-theme="dark"] .darkLayer {
-  opacity: 1;
-}
-
-/* Subtle frosted vignette for crystal-clear readability */
-.overlay {
-  position: absolute;
-  inset: 0;
+  top: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1200px;
+  height: 700px;
+  border-radius: 50%;
   background: radial-gradient(
-    circle at 20% 30%,
-    transparent 0%,
-    rgba(255, 255, 255, 0.4) 100%
+    ellipse 60% 40% at 50% 30%,
+    rgba(99, 102, 241, 0.12) 0%,
+    rgba(79, 70, 229, 0.05) 50%,
+    transparent 80%
   );
-  transition: background 0.6s ease;
+  filter: blur(80px);
   pointer-events: none;
+  transition: opacity 0.4s ease;
 }
 
-[data-theme="dark"] .overlay {
+/* Subtle corner accent glow */
+.ambientGlowBottom {
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 800px;
+  height: 600px;
+  border-radius: 50%;
   background: radial-gradient(
-    circle at 20% 30%,
-    transparent 0%,
-    rgba(8, 8, 8, 0.5) 100%
+    circle,
+    rgba(129, 140, 248, 0.06) 0%,
+    transparent 70%
+  );
+  filter: blur(90px);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+/* Light Theme adjustments */
+:root:not([data-theme="dark"]) .ambientGlowTop {
+  background: radial-gradient(
+    ellipse 60% 40% at 50% 30%,
+    rgba(79, 70, 229, 0.08) 0%,
+    rgba(99, 102, 241, 0.03) 50%,
+    transparent 80%
+  );
+  filter: blur(70px);
+}
+
+:root:not([data-theme="dark"]) .ambientGlowBottom {
+  background: radial-gradient(
+    circle,
+    rgba(79, 70, 229, 0.04) 0%,
+    transparent 70%
   );
 }
