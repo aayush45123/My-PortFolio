@@ -245,8 +245,26 @@
 }
 
 /* ===================================
-   RESPONSIVE
+   RESPONSIVE DESIGN (MOBILE TO 4K)
    =================================== */
+
+/* 2K / Wide Desktop */
+@media (min-width: 1600px) {
+  .heroInner {
+    max-width: 1600px;
+  }
+  .headlineCol {
+    padding: 80px 80px;
+  }
+  .contentCol {
+    padding: 80px 80px 80px 60px;
+  }
+  .heroBio {
+    font-size: 1.15rem;
+  }
+}
+
+/* Tablet & Smaller Laptops */
 @media (max-width: 900px) {
   .heroInner {
     grid-template-columns: 1fr;
@@ -254,39 +272,97 @@
   }
 
   .headlineCol {
-    padding: 48px 24px 40px;
+    padding: 48px 28px 36px;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
   }
 
   .heroTitle {
-    font-size: clamp(3.5rem, 14vw, 5rem);
+    font-size: clamp(3.2rem, 13vw, 5rem);
+    margin-bottom: 20px;
   }
 
   .contentCol {
-    padding: 40px 24px 48px;
+    padding: 36px 28px 48px;
   }
 }
 
-@media (max-width: 480px) {
+/* Mobile Devices */
+@media (max-width: 600px) {
   .tickerBar {
-    padding: 10px 16px;
-    font-size: 0.66rem;
+    padding: 10px 18px;
+    font-size: 0.68rem;
     gap: 12px;
   }
 
-  .tickerStatus {
-    display: none;
+  .headlineCol {
+    padding: 40px 20px 28px;
+  }
+
+  .contentCol {
+    padding: 28px 20px 40px;
+  }
+
+  .metaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .metaItem {
+    padding: 12px 16px;
+  }
+
+  .heroBio {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    padding-left: 14px;
   }
 
   .ctaRow {
     flex-direction: column;
     align-items: stretch;
+    gap: 10px;
   }
 
   .btnPrimary,
   .btnSecondary {
     width: 100%;
     justify-content: center;
+  }
+}
+
+/* Extra Small Phones (<= 380px) */
+@media (max-width: 380px) {
+  .tickerBar {
+    padding: 8px 12px;
+    font-size: 0.62rem;
+    gap: 8px;
+  }
+
+  .tickerStatus {
+    display: none;
+  }
+
+  .headlineCol {
+    padding: 32px 14px 20px;
+  }
+
+  .contentCol {
+    padding: 22px 14px 32px;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.4rem, 12vw, 3.2rem);
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+
+  .metaItem {
+    padding: 10px 12px;
+  }
+
+  .metaVal {
+    font-size: 0.82rem;
   }
 }

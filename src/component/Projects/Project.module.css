@@ -80,7 +80,20 @@
 }
 
 /* Responsive */
+@media (min-width: 1600px) {
+  .projectsContainer {
+    max-width: 1600px;
+  }
+  .projectsSection {
+    padding: 120px 80px;
+  }
+}
+
 @media (max-width: 1024px) {
+  .projectsSection {
+    padding: 80px 24px;
+  }
+
   .projectsGrid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -88,10 +101,30 @@
 
 @media (max-width: 640px) {
   .projectsSection {
-    padding: 80px 16px;
+    padding: 60px 16px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 36px;
   }
 
   .projectsGrid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .viewAllWrapper {
+    margin-top: 36px;
+  }
+}
+
+@media (max-width: 380px) {
+  .projectsSection {
+    padding: 48px 12px;
+  }
+
+  .viewAllBtn {
+    width: 100%;
+    text-align: center;
   }
 }

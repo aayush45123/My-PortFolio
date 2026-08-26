@@ -134,6 +134,13 @@
 }
 
 /* Responsive */
+@media (min-width: 1600px) {
+  .navbarContainer {
+    max-width: 1600px;
+    padding: 0 80px;
+  }
+}
+
 @media (max-width: 768px) {
   .navMenu {
     display: none;
@@ -145,5 +152,15 @@
 
   .navbarContainer {
     padding: 0 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .navbarContainer {
+    padding: 0 12px;
+  }
+
+  .navbarBrand .logo {
+    font-size: 1rem;
   }
 }

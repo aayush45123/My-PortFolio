@@ -92,7 +92,7 @@
 }
 
 /* ===================================
-   GLOBAL RESET
+   GLOBAL RESET & RESPONSIVE FOUNDATION
    =================================== */
 *, *::before, *::after {
   margin: 0;
@@ -102,6 +102,8 @@
 
 html {
   scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -117,6 +119,12 @@ body {
   transition: color 0.25s ease;
 }
 
+/* Prevent layout breaking image overflows */
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  max-width: 100%;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -126,9 +134,22 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   letter-spacing: -0.03em;
   font-weight: 700;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+p, span, div {
+  overflow-wrap: break-word;
 }
 
 ::selection {
   background: var(--text-primary);
   color: var(--bg-primary);
+}
+
+/* Ultra-wide 2K/4K Screen enhancements */
+@media (min-width: 2000px) {
+  :root {
+    font-size: 18px;
+  }
 }

@@ -96,13 +96,47 @@
   color: var(--accent-amber);
 }
 
-@media (max-width: 600px) {
+/* Responsive */
+@media (min-width: 1600px) {
   .footerInner {
-    padding: 0 20px;
+    max-width: 1600px;
+    padding: 0 80px;
+  }
+}
+
+@media (max-width: 900px) {
+  .footerInner {
+    padding: 0 28px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footerSection {
+    padding: 36px 0 20px;
+  }
+
+  .footerInner {
+    padding: 0 16px;
+    gap: 24px;
+  }
+
+  .socialRow {
+    gap: 14px;
   }
 
   .bottomRow {
     flex-direction: column;
     align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .footerInner {
+    padding: 0 12px;
+  }
+
+  .brandName {
+    font-size: 1.2rem;
   }
 }

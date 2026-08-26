@@ -193,6 +193,26 @@
     bottom: calc(100% + 12px);
   }
 }
+
+@media (max-width: 380px) {
+  .dock {
+    gap: 3px;
+    padding: 6px 8px;
+    border-radius: 14px;
+  }
+
+  .dockItem {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  .dockItem .icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 .tooltip {
   z-index: 9999; /* tooltip always on top */
 }

@@ -12,7 +12,20 @@ const app = express();
 // ✅ CORS (PRODUCTION & LOCAL SAFE)
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://aayush45123.github.io"],
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g. mobile apps, curl) or any allowed domain
+      if (
+        !origin ||
+        origin.includes("localhost") ||
+        origin.includes("127.0.0.1") ||
+        origin.includes("github.io") ||
+        origin.includes("vercel.app")
+      ) {
+        callback(null, true);
+      } else {
+        callback(null, true); // Allow all web clients for public portfolio
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

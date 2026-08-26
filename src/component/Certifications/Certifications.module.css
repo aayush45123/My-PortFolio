@@ -157,7 +157,20 @@
 }
 
 /* Responsive */
+@media (min-width: 1600px) {
+  .certContainer {
+    max-width: 1600px;
+  }
+  .certSection {
+    padding: 120px 80px;
+  }
+}
+
 @media (max-width: 1024px) {
+  .certSection {
+    padding: 80px 24px;
+  }
+
   .certGrid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -165,10 +178,29 @@
 
 @media (max-width: 600px) {
   .certSection {
-    padding: 80px 16px;
+    padding: 60px 16px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 36px;
   }
 
   .certGrid {
     grid-template-columns: 1fr;
+  }
+
+  .viewBadge {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 380px) {
+  .certSection {
+    padding: 48px 12px;
+  }
+
+  .viewBtn {
+    width: 100%;
+    text-align: center;
   }
 }

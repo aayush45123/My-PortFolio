@@ -344,6 +344,10 @@
 
 /* Responsive */
 @media (max-width: 800px) {
+  .projectLinks {
+    opacity: 1;
+  }
+
   .modalGrid {
     grid-template-columns: 1fr;
   }
@@ -356,5 +360,43 @@
 
   .modalDetailsSection {
     padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectContent {
+    padding: 16px;
+  }
+
+  .projectTitle {
+    font-size: 1rem;
+  }
+
+  .imageContainer {
+    height: 165px;
+  }
+
+  .modalOverlay {
+    padding: 12px;
+  }
+
+  .modalContent {
+    max-height: 92vh;
+  }
+
+  .modalImage {
+    height: 180px;
+  }
+
+  .modalActionLinks {
+    flex-direction: column;
+  }
+
+  .modalTitle {
+    font-size: 1.2rem;
+  }
+
+  .modalDetailsSection {
+    padding: 16px 14px;
   }
 }

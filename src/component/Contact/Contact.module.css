@@ -215,7 +215,20 @@
 }
 
 /* Responsive */
+@media (min-width: 1600px) {
+  .contactContainer {
+    max-width: 1600px;
+  }
+  .contactSection {
+    padding: 120px 80px;
+  }
+}
+
 @media (max-width: 860px) {
+  .contactSection {
+    padding: 80px 24px;
+  }
+
   .contactWrapper {
     grid-template-columns: 1fr;
   }
@@ -233,10 +246,45 @@
 
 @media (max-width: 600px) {
   .contactSection {
-    padding: 80px 16px;
+    padding: 60px 16px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 36px;
+  }
+
+  .contactInfo {
+    padding: 24px 18px;
+  }
+
+  .contactForm {
+    padding: 24px 18px;
+  }
+
+  .socialLinks {
+    flex-wrap: wrap;
   }
 
   .submitBtn {
     width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .contactSection {
+    padding: 48px 12px;
+  }
+
+  .contactInfo {
+    padding: 18px 12px;
+  }
+
+  .contactForm {
+    padding: 18px 12px;
+  }
+
+  .infoValue {
+    font-size: 0.78rem;
+    word-break: break-all;
   }
 }

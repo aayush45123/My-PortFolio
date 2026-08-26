@@ -189,7 +189,24 @@
 }
 
 /* Responsive */
+@media (min-width: 1600px) {
+  .aboutContainer {
+    max-width: 1600px;
+  }
+  .aboutSection {
+    padding: 120px 80px;
+  }
+  .aboutGrid {
+    grid-template-columns: 420px 1fr;
+    gap: 80px;
+  }
+}
+
 @media (max-width: 900px) {
+  .aboutSection {
+    padding: 80px 24px;
+  }
+
   .aboutGrid {
     grid-template-columns: 1fr;
     gap: 40px;
@@ -209,7 +226,11 @@
 
 @media (max-width: 600px) {
   .aboutSection {
-    padding: 80px 16px;
+    padding: 60px 16px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 36px;
   }
 
   .metricsLedger {
@@ -217,11 +238,32 @@
   }
 
   .metricItem {
+    padding: 16px 14px;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
   }
 
   .metricItem:last-child {
     border-bottom: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .aboutSection {
+    padding: 48px 12px;
+  }
+
+  .imageWrapper {
+    max-width: 100%;
+  }
+
+  .factBox {
+    max-width: 100%;
+    padding: 12px;
+    font-size: 0.7rem;
+  }
+
+  .metricNumber {
+    font-size: 1.8rem;
   }
 }
