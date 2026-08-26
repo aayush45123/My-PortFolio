@@ -1,76 +1,89 @@
 /* ===================================
-   GOOGLE FONTS
+   GOOGLE FONTS (EDITORIAL TYPOGRAPHY)
    =================================== */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=UnifrakturCook:wght@700&display=swap');
 
 /* ===================================
-   APP.CSS - MODERN PRO DESIGN TOKENS
+   APP.CSS - MONOCHROME EDITORIAL TOKENS
    =================================== */
 
 :root {
-  /* Light Theme (Crisp, High-Contrast Minimalist) */
-  --bg-primary: #fcfcfd;
-  --bg-secondary: #f4f4f7;
-  --bg-tertiary: #ebebed;
+  /* Light Theme — Newsprint Paper */
+  --bg-primary: #f5f0e8;
+  --bg-secondary: #ede8df;
+  --bg-tertiary: #e0d9cc;
 
-  --text-primary: #09090b;
-  --text-secondary: #52525b;
-  --text-tertiary: #a1a1aa;
+  --text-primary: #141210;
+  --text-secondary: #3d3830;
+  --text-tertiary: #8a8278;
 
-  --border-color: rgba(0, 0, 0, 0.08);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.08);
+  --border-color: #c9c2b4;
+  --border-subtle: #ddd7cc;
+  --border-strong: #141210;
 
-  --accent: #4F46E5;
-  --accent-hover: #4338CA;
-  --accent-muted: rgba(79, 70, 229, 0.08);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 0 rgba(0,0,0,0.04);
+  --shadow-md: 2px 4px 16px rgba(0,0,0,0.12);
+  --shadow-lg: 4px 8px 32px rgba(0,0,0,0.18);
+  --shadow-page: 8px 8px 0px rgba(0,0,0,0.15), 12px 12px 0px rgba(0,0,0,0.08);
 
-  --accent-primary: #4F46E5;
-  --accent-secondary: #4338CA;
-  --accent-gradient: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
+  --accent: #141210;
+  --accent-hover: #2c2820;
+  --accent-muted: #ede8df;
 
-  --navbar-bg: rgba(252, 252, 253, 0.85);
-  --navbar-border: rgba(0, 0, 0, 0.06);
+  --accent-primary: #141210;
+  --accent-secondary: #2c2820;
+  --accent-gradient: none;
 
-  --card-bg: #ffffff;
-  --card-hover: #f9f9fb;
+  --navbar-bg: rgba(245, 240, 232, 0.96);
+  --navbar-border: #c9c2b4;
 
-  --transition-speed: 0.2s;
+  --card-bg: #faf7f2;
+  --card-hover: #f5f0e8;
+
+  /* Newspaper specific */
+  --paper-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  --column-rule: 1px solid #c9c2b4;
 
   --font-heading: 'Space Grotesk', -apple-system, sans-serif;
   --font-body: 'Inter', -apple-system, sans-serif;
-  --font-mono: 'Space Mono', monospace;
+  --font-mono: 'Space Mono', 'Courier New', monospace;
 }
 
 [data-theme="dark"] {
-  /* Dark Theme (Obsidian & Soft Atmospheric Glow) */
-  --bg-primary: #08080a;
-  --bg-secondary: #111114;
-  --bg-tertiary: #19191e;
+  /* Dark Theme — Night Edition Newsprint */
+  --bg-primary: #111009;
+  --bg-secondary: #1a1813;
+  --bg-tertiary: #211f18;
 
-  --text-primary: #f4f4f6;
-  --text-secondary: #9da0a8;
-  --text-tertiary: #5d606a;
+  --text-primary: #e8e2d6;
+  --text-secondary: #a09890;
+  --text-tertiary: #5c5750;
 
-  --border-color: rgba(255, 255, 255, 0.08);
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.7);
+  --border-color: #2e2b24;
+  --border-subtle: #221f19;
+  --border-strong: #e8e2d6;
 
-  --accent: #6366F1;
-  --accent-hover: #4F46E5;
-  --accent-muted: rgba(99, 102, 241, 0.12);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.6);
+  --shadow-md: 2px 4px 16px rgba(0,0,0,0.7);
+  --shadow-lg: 4px 8px 32px rgba(0,0,0,0.85);
+  --shadow-page: 8px 8px 0px rgba(0,0,0,0.5), 12px 12px 0px rgba(0,0,0,0.3);
 
-  --accent-primary: #6366F1;
-  --accent-secondary: #4F46E5;
-  --accent-gradient: linear-gradient(135deg, #6366F1 0%, #818CF8 100%);
+  --accent: #e8e2d6;
+  --accent-hover: #cfc9bc;
+  --accent-muted: #1a1813;
 
-  --navbar-bg: rgba(8, 8, 10, 0.85);
-  --navbar-border: rgba(255, 255, 255, 0.06);
+  --accent-primary: #e8e2d6;
+  --accent-secondary: #cfc9bc;
+  --accent-gradient: none;
 
-  --card-bg: #111114;
-  --card-hover: #17171b;
+  --navbar-bg: rgba(17, 16, 9, 0.96);
+  --navbar-border: #2e2b24;
+
+  --card-bg: #17150f;
+  --card-hover: #1d1b14;
+
+  --paper-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.06'/%3E%3C/svg%3E");
+  --column-rule: 1px solid #2e2b24;
 }
 
 /* ===================================
@@ -90,17 +103,27 @@ body {
   font-family: var(--font-body);
   color: var(--text-primary);
   background-color: var(--bg-primary);
+  background-image: var(--paper-texture);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  line-height: 1.6;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+::selection {
+  background: var(--text-primary);
+  color: var(--bg-primary);
 }

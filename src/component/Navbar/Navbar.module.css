@@ -1,5 +1,5 @@
 /* ===================================
-   NAVBAR — Sharp & Minimal
+   NAVBAR — MONOCHROME EDITORIAL
    =================================== */
 
 .navbar {
@@ -8,22 +8,18 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: all 0.2s ease;
-  border-bottom: 1px solid transparent;
-}
-
-.navbar.scrolled {
-  border-bottom-color: var(--border-color);
   background: var(--navbar-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
 }
 
 .navbarContainer {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
-  height: 64px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -32,67 +28,41 @@
 /* Brand */
 .navbarBrand .logo {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
-  cursor: pointer;
+  letter-spacing: -0.03em;
   text-decoration: none;
-  transition: color 0.2s;
-}
-
-.navbarBrand .logo:hover {
-  color: var(--accent);
 }
 
 /* Desktop Nav */
 .navMenu {
   display: flex;
   list-style: none;
-  gap: 0;
+  gap: 4px;
   align-items: center;
 }
 
-.navItem {
-  position: relative;
-}
-
 .navLink {
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   color: var(--text-secondary);
   text-decoration: none;
+  font-size: 0.8rem;
   font-weight: 500;
-  font-size: 0.875rem;
-  padding: 8px 16px;
-  display: block;
-  transition: color 0.2s;
-  position: relative;
+  padding: 6px 12px;
+  border-radius: 0;
+  transition: color 0.2s, background 0.2s;
+  letter-spacing: 0.02em;
 }
 
 .navLink:hover {
   color: var(--text-primary);
+  background: var(--bg-secondary);
 }
 
 .navLink.active {
-  color: var(--accent);
-}
-
-.navLink::after {
-  content: '';
-  position: absolute;
-  bottom: 4px;
-  left: 16px;
-  right: 16px;
-  height: 1px;
-  background: var(--accent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.2s ease;
-}
-
-.navLink:hover::after,
-.navLink.active::after {
-  transform: scaleX(1);
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
 /* Actions */
@@ -105,83 +75,56 @@
 .themeToggle {
   background: transparent;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  color: var(--text-primary);
   transition: border-color 0.2s, background 0.2s;
 }
 
 .themeToggle:hover {
-  border-color: var(--accent);
-  background: var(--accent-muted);
+  border-color: var(--border-strong);
+  background: var(--bg-secondary);
 }
 
-.icon {
-  color: var(--text-secondary);
-  transition: color 0.2s;
-}
-
-.themeToggle:hover .icon {
-  color: var(--accent);
-}
-
-/* Mobile Toggle */
 .mobileToggle {
   display: none;
   background: transparent;
   border: 1px solid var(--border-color);
-  border-radius: 6px;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: border-color 0.2s;
+  color: var(--text-primary);
 }
 
-.mobileToggle:hover {
-  border-color: var(--accent);
-}
-
-/* Mobile Menu */
 .mobileMenu {
   display: none;
   flex-direction: column;
   border-top: 1px solid var(--border-color);
   background: var(--navbar-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease, opacity 0.3s ease;
+  padding: 12px 0;
 }
 
 .mobileMenu.active {
   display: flex;
-  max-height: 400px;
-  opacity: 1;
-  padding: 8px 0;
 }
 
 .mobileLink {
-  font-family: var(--font-body);
+  font-family: var(--font-mono);
   color: var(--text-secondary);
   text-decoration: none;
-  padding: 12px 24px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  transition: color 0.2s, background 0.2s;
+  padding: 10px 24px;
+  font-size: 0.85rem;
 }
 
-.mobileLink:hover,
-.mobileLink.active {
-  color: var(--accent);
-  background: var(--accent-muted);
+.mobileLink:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
 }
 
 /* Responsive */
@@ -195,6 +138,6 @@
   }
 
   .navbarContainer {
-    padding: 0 20px;
+    padding: 0 16px;
   }
 }

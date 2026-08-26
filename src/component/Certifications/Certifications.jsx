@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Certifications.module.css";
 import { API_BASE } from "../../api/axios";
+import { ExternalLink } from "lucide-react";
 
 // Helper to support both Cloudinary full URLs and legacy local relative URLs
 const resolveMediaUrl = (url) => {
@@ -33,42 +34,45 @@ const Certifications = () => {
   return (
     <section className={styles.certSection} id="certifications">
       <div className={styles.certContainer}>
+        {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <div className={styles.sectionLabel}>Achievements</div>
-          <h2 className={styles.sectionTitle}>Certifications</h2>
-          <p className={styles.sectionDescription}>
-            A showcase of my verified course completions and workshops.
-          </p>
+          <span className={styles.sectionIndex}>[ 04 ]</span>
+          <h2 className={styles.sectionTitle}>Certifications & Honors</h2>
         </div>
 
         {loading ? (
-          <p style={{ color: "var(--text-tertiary)", textAlign: "center", padding: "40px 0", fontFamily: "var(--font-mono)", fontSize: "0.9rem" }}>
-            Loading certifications...
-          </p>
+          <p className={styles.statusMessage}>Loading credentials...</p>
         ) : certifications.length === 0 ? (
-          <p style={{ color: "var(--text-tertiary)", textAlign: "center", padding: "40px 0", fontFamily: "var(--font-mono)", fontSize: "0.9rem" }}>
-            No certificates added yet. Upload new certificates via /admin.
+          <p className={styles.statusMessage}>
+            No certificates added yet. Upload via the admin route.
           </p>
         ) : (
           <>
             <div className={styles.certGrid}>
-              {visibleCerts.map((cert) => (
+              {visibleCerts.map((cert, i) => (
                 <div
                   key={cert._id}
                   className={styles.certCard}
                   onClick={() =>
-                    window.open(
-                      resolveMediaUrl(cert.fileURL),
-                      "_blank"
-                    )
+                    window.open(resolveMediaUrl(cert.fileURL), "_blank")
                   }
+                  title="Click to view original document"
                 >
-                  <img
-                    src={resolveMediaUrl(cert.thumbnailURL)}
-                    alt={cert.title}
-                    className={styles.certThumbnail}
-                  />
-                  <p className={styles.certTitle}>{cert.title}</p>
+                  <div className={styles.imageContainer}>
+                    <img
+                      src={resolveMediaUrl(cert.thumbnailURL)}
+                      alt={cert.title}
+                      className={styles.certThumbnail}
+                    />
+                    <div className={styles.viewBadge}>
+                      <ExternalLink size={14} />
+                    </div>
+                  </div>
+
+                  <div className={styles.cardInfo}>
+                    <span className={styles.certIndex}>CERT / {String(i + 1).padStart(2, "0")}</span>
+                    <p className={styles.certTitle}>{cert.title}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -79,7 +83,7 @@ const Certifications = () => {
                   className={styles.viewBtn}
                   onClick={() => setShowAll(!showAll)}
                 >
-                  {showAll ? "View Less" : "View All"}
+                  {showAll ? "[ View Less ]" : "[ View All Certifications ]"}
                 </button>
               </div>
             )}

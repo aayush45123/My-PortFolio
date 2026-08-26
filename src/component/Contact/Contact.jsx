@@ -33,56 +33,57 @@ const Contact = () => {
       <div className={styles.contactContainer}>
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <div className={styles.sectionLabel}>
-            <span className={styles.labelNumber}>05</span>
-            Contact
-          </div>
-          <h2 className={styles.sectionTitle}>Let's build something together</h2>
-          <p className={styles.sectionDescription}>
-            Feel free to reach out for collaborations, questions, or opportunities.
-          </p>
+          <span className={styles.sectionIndex}>[ 05 ]</span>
+          <h2 className={styles.sectionTitle}>Get In Touch</h2>
         </div>
 
         <div className={styles.contactWrapper}>
           {/* Left - Info */}
           <div className={styles.contactInfo}>
-            <h3 className={styles.infoTitle}>Contact Details</h3>
+            <div className={styles.infoBlock}>
+              <h3 className={styles.infoHeading}>Inquiries & Opportunities</h3>
+              <p className={styles.infoSubtext}>
+                Open to full-time engineering roles, high-impact freelance builds, and technical consultations.
+              </p>
+            </div>
 
             <div className={styles.infoList}>
               <a href="mailto:aayushbharda999@gmail.com" className={styles.infoItem}>
-                <Mail className={styles.icon} size={18} />
-                <span>aayushbharda999@gmail.com</span>
+                <span className={styles.infoLabel}>EMAIL</span>
+                <span className={styles.infoValue}>aayushbharda999@gmail.com</span>
               </a>
 
               <a href="tel:+919167541096" className={styles.infoItem}>
-                <Phone className={styles.icon} size={18} />
-                <span>+91 91675 41096</span>
+                <span className={styles.infoLabel}>PHONE</span>
+                <span className={styles.infoValue}>+91 91675 41096</span>
               </a>
 
               <div className={styles.infoItem}>
-                <MapPin className={styles.icon} size={18} />
-                <span>Mumbai, India</span>
+                <span className={styles.infoLabel}>LOCATION</span>
+                <span className={styles.infoValue}>Mumbai, India</span>
               </div>
             </div>
 
             <div className={styles.socialWrapper}>
-              <span className={styles.socialLabel}>Socials</span>
+              <span className={styles.socialLabel}>Profiles</span>
               <div className={styles.socialLinks}>
                 <a
                   href="https://www.linkedin.com/in/aayush-bharda-399958311/"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="LinkedIn"
+                  className={styles.socialLink}
                 >
-                  <Linkedin size={18} />
+                  <Linkedin size={15} />
+                  <span>LinkedIn</span>
                 </a>
                 <a
                   href="https://github.com/aayush45123"
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="GitHub"
+                  className={styles.socialLink}
                 >
-                  <Github size={18} />
+                  <Github size={15} />
+                  <span>GitHub</span>
                 </a>
               </div>
             </div>
@@ -91,32 +92,40 @@ const Contact = () => {
           {/* Right - Form */}
           <form className={styles.contactForm} ref={formRef} onSubmit={sendEmail}>
             <div className={styles.formGroup}>
-              <label>Name</label>
-              <input name="name" type="text" placeholder="Your Name" required />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label>Email</label>
+              <label className={styles.label}>Name</label>
               <input
-                name="email"
-                type="email"
-                placeholder="your.email@example.com"
+                name="name"
+                type="text"
+                placeholder="Your Name"
+                className={styles.input}
                 required
               />
             </div>
 
             <div className={styles.formGroup}>
-              <label>Message</label>
+              <label className={styles.label}>Email</label>
+              <input
+                name="email"
+                type="email"
+                placeholder="your.email@example.com"
+                className={styles.input}
+                required
+              />
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Message</label>
               <textarea
                 name="message"
-                placeholder="How can I help you?"
+                placeholder="Describe your project, timeline, or query..."
+                className={styles.textarea}
                 required
               ></textarea>
             </div>
 
             <button type="submit" className={styles.submitBtn}>
               <span>Send Message</span>
-              <Send size={16} />
+              <Send size={14} />
             </button>
           </form>
         </div>

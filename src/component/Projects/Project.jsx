@@ -34,30 +34,26 @@ const Projects = () => {
   return (
     <section className={styles.projectsSection} id="projects">
       <div className={styles.projectsContainer}>
+        {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <div className={styles.sectionLabel}>Portfolio</div>
-          <h2 className={styles.sectionTitle}>Featured Projects</h2>
-          <p className={styles.sectionDescription}>
-            A collection of my recent work showcasing various web development
-            projects and applications built with modern technologies.
-          </p>
+          <span className={styles.sectionIndex}>[ 03 ]</span>
+          <h2 className={styles.sectionTitle}>Selected Works</h2>
         </div>
 
         {loading ? (
-          <p style={{ color: "var(--text-tertiary)", textAlign: "center", padding: "40px 0", fontFamily: "var(--font-mono)", fontSize: "0.9rem" }}>
-            Loading projects...
-          </p>
+          <p className={styles.statusMessage}>Loading projects...</p>
         ) : projects.length === 0 ? (
-          <p style={{ color: "var(--text-tertiary)", textAlign: "center", padding: "40px 0", fontFamily: "var(--font-mono)", fontSize: "0.9rem" }}>
-            No projects added yet. Upload new projects via /admin.
+          <p className={styles.statusMessage}>
+            No projects published yet. Add projects via the admin route.
           </p>
         ) : (
           <>
             <div className={styles.projectsGrid}>
-              {visibleProjects.map((project) => (
+              {visibleProjects.map((project, i) => (
                 <ProjectCard
                   key={project._id}
                   project={{
+                    index: String(i + 1).padStart(2, "0"),
                     title: project.title,
                     description: project.description,
                     image: resolveMediaUrl(project.imageURL),
@@ -75,7 +71,7 @@ const Projects = () => {
                   className={styles.viewAllBtn}
                   onClick={() => setShowAll(!showAll)}
                 >
-                  {showAll ? "View Less" : "View More Projects"} <span>→</span>
+                  {showAll ? "[ View Less ]" : "[ View All Projects ]"}
                 </button>
               </div>
             )}

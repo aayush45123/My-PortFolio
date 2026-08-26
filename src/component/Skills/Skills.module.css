@@ -1,70 +1,53 @@
 /* ===================================
-   SKILLS SECTION — Tag Grid
+   SKILLS — MONOCHROME EDITORIAL
    =================================== */
+
 .skillsSection {
-  padding: 100px 24px;
+  padding: 100px 60px;
+  border-top: 1px solid var(--border-color);
   position: relative;
 }
 
 .skillsContainer {
-  max-width: 1100px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease-out forwards;
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ===================================
-   SECTION HEADER
-   =================================== */
+/* Header */
 .sectionHeader {
-  margin-bottom: 56px;
-}
-
-.sectionLabel {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-tertiary);
-  margin-bottom: 16px;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 48px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--text-primary);
 }
 
-.labelNumber {
-  color: var(--accent);
+.sectionIndex {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
 }
 
 .sectionTitle {
   font-family: var(--font-heading);
-  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-size: clamp(2rem, 4vw, 2.8rem);
   font-weight: 800;
-  letter-spacing: -0.02em;
   color: var(--text-primary);
-  line-height: 1.1;
+  letter-spacing: -0.04em;
 }
 
-/* ===================================
-   TECH LOGO STRIP
-   =================================== */
+/* Tech Icon Strip */
 .logoStrip {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  padding: 28px 32px;
-  background: var(--card-bg);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  gap: 6px;
+  padding: 20px 24px;
   border: 1px solid var(--border-color);
-  border-radius: 8px;
-  margin-bottom: 48px;
+  background: var(--bg-secondary);
+  margin-bottom: 40px;
 }
 
 .logoItem {
@@ -72,74 +55,82 @@
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  padding: 12px 16px;
-  border-radius: 6px;
-  cursor: default;
-  transition: background 0.2s, transform 0.2s;
-  min-width: 70px;
+  padding: 10px 14px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  min-width: 65px;
 }
 
 .logoItem:hover {
   background: var(--bg-primary);
-  transform: translateY(-3px);
+  border-color: var(--border-color);
 }
 
 .logo {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   object-fit: contain;
+  filter: grayscale(100%);
+  transition: filter 0.2s;
 }
 
-[data-theme="dark"] .logo {
-  filter: brightness(1.1);
+.logoItem:hover .logo {
+  filter: grayscale(0%);
 }
 
 .logoName {
-  font-size: 0.7rem;
   font-family: var(--font-mono);
+  font-size: 0.68rem;
   color: var(--text-tertiary);
-  text-align: center;
-  white-space: nowrap;
+  letter-spacing: 0.02em;
 }
 
-/* ===================================
-   SKILL CATEGORY GRID
-   =================================== */
+/* Skills Ledger Grid */
 .skillsGrid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  overflow: hidden;
   background: var(--border-color);
+  border: 1px solid var(--border-color);
 }
 
-.skillCategory {
+.skillCard {
   background: var(--card-bg);
-  padding: 32px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   transition: background 0.2s;
 }
 
-.skillCategory:hover {
+.skillCard:hover {
   background: var(--card-hover);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  border-bottom: 3px solid var(--text-primary);
+}
+
+.categoryIndex {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
 }
 
 .categoryTitle {
   font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 700;
+  font-size: 0.95rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--accent);
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-color);
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
 }
 
-/* ===================================
-   SKILL TAGS
-   =================================== */
+/* Tags */
 .tagList {
   display: flex;
   flex-wrap: wrap;
@@ -147,30 +138,30 @@
 }
 
 .tag {
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 500;
-  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 5px 10px;
   border: 1px solid var(--border-color);
-  border-radius: 3px;
-  color: var(--text-secondary);
   background: var(--bg-primary);
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
-  cursor: default;
+  color: var(--text-secondary);
+  transition: all 0.2s;
 }
 
-.tag:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-muted);
+.skillCard:hover .tag {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
 }
 
-/* ===================================
-   RESPONSIVE
-   =================================== */
-@media (max-width: 768px) {
+/* Responsive */
+@media (max-width: 960px) {
+  .skillsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
   .skillsSection {
-    padding: 80px 20px;
+    padding: 80px 16px;
   }
 
   .skillsGrid {
@@ -178,23 +169,16 @@
   }
 
   .logoStrip {
-    padding: 20px;
-    gap: 4px;
+    padding: 16px;
   }
 
   .logoItem {
-    padding: 10px 12px;
-    min-width: 60px;
+    min-width: 55px;
+    padding: 8px;
   }
 
   .logo {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-@media (max-width: 480px) {
-  .skillCategory {
-    padding: 24px 20px;
+    width: 24px;
+    height: 24px;
   }
 }
