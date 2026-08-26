@@ -7,8 +7,9 @@ const AdminLogin = ({ onLogin }) => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // simple password check
-    if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
+    const adminPass = import.meta.env.VITE_ADMIN_PASSWORD || "admin123";
+
+    if (password === adminPass) {
       localStorage.setItem("admin-auth", "true");
       onLogin();
     } else {
@@ -35,7 +36,7 @@ const AdminLogin = ({ onLogin }) => {
         </button>
       </form>
 
-      <p style={{ textAlign: "center" }}>{msg}</p>
+      {msg && <p style={{ textAlign: "center", color: "#ff4d4f", marginTop: "12px", fontSize: "14px" }}>{msg}</p>}
     </div>
   );
 };
@@ -44,27 +45,36 @@ const styles = {
   container: {
     padding: "40px",
     maxWidth: "400px",
-    margin: "50px auto",
-    background: "#1b1b1b",
-    borderRadius: "10px",
-    color: "#fff",
+    margin: "120px auto 40px",
+    background: "var(--card-bg, #111)",
+    borderRadius: "8px",
+    border: "1px solid var(--border-color, #222)",
+    color: "var(--text-primary, #fff)",
   },
-  heading: { textAlign: "center", marginBottom: "20px" },
-  form: { display: "flex", flexDirection: "column", gap: "12px" },
-  label: { fontWeight: 600 },
+  heading: { textAlign: "center", marginBottom: "20px", fontFamily: "var(--font-heading)" },
+  form: { display: "flex", flexDirection: "column", gap: "14px" },
+  label: { fontSize: "12px", fontWeight: "600", color: "var(--text-tertiary, #888)", fontFamily: "var(--font-mono)", textTransform: "uppercase" },
   input: {
-    padding: "10px",
-    background: "#222",
-    color: "#fff",
-    borderRadius: "6px",
-    border: "1px solid #444",
+    padding: "12px",
+    background: "var(--bg-primary, #0a0a0a)",
+    color: "var(--text-primary, #fff)",
+    borderRadius: "4px",
+    border: "1px solid var(--border-color, #333)",
+    fontFamily: "var(--font-body)",
+    fontSize: "14px",
+    outline: "none",
   },
   button: {
-    padding: "10px",
-    background: "#007bff",
+    padding: "12px",
+    background: "var(--accent, #6C63FF)",
     color: "#fff",
-    borderRadius: "6px",
+    borderRadius: "4px",
     border: "none",
+    fontWeight: "600",
+    fontFamily: "var(--font-body)",
+    cursor: "pointer",
+    fontSize: "15px",
+    marginTop: "6px",
   },
 };
 

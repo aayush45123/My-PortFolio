@@ -51,11 +51,29 @@
   transform: translateY(-2px);
 }
 
-/* Copyright */
+/* Copyright & Admin Link */
 .right {
   font-family: var(--font-mono);
   color: var(--text-tertiary);
   font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.adminLink {
+  color: var(--text-tertiary);
+  text-decoration: none;
+  font-size: 0.75rem;
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.adminLink:hover {
+  color: var(--accent);
+  border-color: var(--border-color);
 }
 
 /* Responsive */
