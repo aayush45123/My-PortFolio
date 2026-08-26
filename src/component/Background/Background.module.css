@@ -1,68 +1,231 @@
-/* ===================================
-   NEWSPAPER PAPER STACK BACKGROUND
-   — Gives the illusion of stacked printed pages
-   =================================== */
+/* ===================================================
+   NEWSPAPER BROADSHEET BACKGROUND
+   — Sharp column rules, horizontal print lines,
+     diagonal crease folds, warm paper layers
+   =================================================== */
 
-/* Layer 3 — Deepest shadow page */
-.paperLayer3 {
-  position: fixed;
-  top: 12px;
-  left: 12px;
-  right: -12px;
-  bottom: -12px;
-  background: var(--bg-tertiary);
-  background-image: var(--paper-texture);
-  z-index: -3;
-  transition: background 0.25s ease;
-}
-
-/* Layer 2 — Middle page */
-.paperLayer2 {
-  position: fixed;
-  top: 6px;
-  left: 6px;
-  right: -6px;
-  bottom: -6px;
-  background: var(--bg-secondary);
-  background-image: var(--paper-texture);
-  z-index: -2;
-  transition: background 0.25s ease;
-}
-
-/* Layer 1 — Top page (the actual canvas) */
-.paperLayer1 {
+.pageStack {
   position: fixed;
   inset: 0;
-  background: var(--bg-primary);
-  background-image: var(--paper-texture);
+  pointer-events: none;
   z-index: -1;
-  transition: background 0.25s ease;
-
-  /* Subtle inner page shadow on all sides */
-  box-shadow:
-    inset 6px 0 18px rgba(0,0,0,0.04),
-    inset -6px 0 18px rgba(0,0,0,0.04),
-    inset 0 6px 18px rgba(0,0,0,0.03);
 }
 
-/* Page-curl effect in bottom-right corner via pseudo-element */
+/* Bottom shadow layer — offset to show page depth */
+.paperLayer3 {
+  position: absolute;
+  inset: 0;
+  top: 10px;
+  left: 10px;
+  right: -10px;
+  bottom: -10px;
+  background: #b5ac9c;
+  z-index: -3;
+}
+
+[data-theme="dark"] .paperLayer3 {
+  background: #0c0b07;
+}
+
+/* Mid layer */
+.paperLayer2 {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: -5px;
+  bottom: -5px;
+  background: #c9c0ae;
+  z-index: -2;
+}
+
+[data-theme="dark"] .paperLayer2 {
+  background: #100e09;
+}
+
+/* ===================================================
+   TOP SURFACE — THE ACTUAL NEWSPAPER SHEET
+   =================================================== */
+.paperLayer1 {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+
+  /* === SHARP NEWSPAPER TEXTURE STACK === */
+  background-color: #e2d9c6;
+
+  background-image:
+    /* 1) SHARP HORIZONTAL PRINT LINES — like actual newspaper columns */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 22px,
+      rgba(100, 80, 50, 0.055) 22px,
+      rgba(100, 80, 50, 0.055) 23px
+    ),
+
+    /* 2) VERTICAL COLUMN RULES — newspaper column separators */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 239px,
+      rgba(100, 80, 50, 0.09) 239px,
+      rgba(100, 80, 50, 0.09) 241px
+    ),
+
+    /* 3) DIAGONAL CREASE LINE 1 — main paper fold */
+    linear-gradient(
+      127deg,
+      transparent 0%,
+      transparent 38%,
+      rgba(80, 60, 35, 0.055) 38.3%,
+      rgba(80, 60, 35, 0.055) 38.6%,
+      transparent 39%,
+      transparent 100%
+    ),
+
+    /* 4) DIAGONAL CREASE LINE 2 */
+    linear-gradient(
+      52deg,
+      transparent 0%,
+      transparent 55%,
+      rgba(80, 60, 35, 0.04) 55.3%,
+      rgba(80, 60, 35, 0.04) 55.6%,
+      transparent 56%,
+      transparent 100%
+    ),
+
+    /* 5) SUBTLE CRUMPLE SHADING — radial light + shadow patches */
+    radial-gradient(
+      ellipse 70% 40% at 25% 20%,
+      rgba(255, 252, 240, 0.55) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 75% 65%,
+      rgba(130, 100, 60, 0.07) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 40% 30% at 15% 80%,
+      rgba(255, 252, 240, 0.35) 0%,
+      transparent 100%
+    ),
+
+    /* 6) OVERALL WARM VIGNETTE */
+    radial-gradient(
+      ellipse 100% 100% at 50% 50%,
+      transparent 50%,
+      rgba(100, 75, 40, 0.09) 100%
+    );
+
+  /* Left-spine inner shadow — like a bound newspaper */
+  box-shadow:
+    inset 18px 0 36px rgba(80, 60, 30, 0.08),
+    inset -8px 0 20px rgba(80, 60, 30, 0.04),
+    inset 0 0 60px rgba(80, 60, 30, 0.05);
+
+  transition: background-color 0.3s ease;
+}
+
+/* PAGE CURL — bottom-right corner fold */
 .paperLayer1::after {
   content: '';
-  position: fixed;
+  position: absolute;
   bottom: 0;
   right: 0;
   width: 0;
   height: 0;
   border-style: solid;
-  border-width: 0 0 40px 40px;
-  border-color: transparent transparent var(--bg-tertiary) transparent;
-  filter: drop-shadow(-2px -2px 4px rgba(0,0,0,0.12));
-  transition: border-width 0.3s ease;
-  z-index: 10;
-  pointer-events: none;
+  border-width: 0 0 50px 50px;
+  border-color: transparent transparent #b5ac9c transparent;
+  filter: drop-shadow(-2px -2px 6px rgba(80, 60, 30, 0.22));
+  transition: border-width 0.35s ease;
+  z-index: 2;
 }
 
-.pageStack:hover ~ .paperLayer1::after,
 .paperLayer1:hover::after {
-  border-width: 0 0 56px 56px;
+  border-width: 0 0 72px 72px;
+}
+
+/* =============================================
+   DARK MODE — Aged / Burnt newspaper at night
+   ============================================= */
+[data-theme="dark"] .paperLayer1 {
+  background-color: #18150d;
+
+  background-image:
+    /* Sharp horizontal lines */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 22px,
+      rgba(200, 180, 130, 0.04) 22px,
+      rgba(200, 180, 130, 0.04) 23px
+    ),
+
+    /* Vertical column rules */
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 239px,
+      rgba(200, 180, 130, 0.07) 239px,
+      rgba(200, 180, 130, 0.07) 241px
+    ),
+
+    /* Diagonal crease 1 */
+    linear-gradient(
+      127deg,
+      transparent 0%,
+      transparent 38%,
+      rgba(180, 160, 110, 0.05) 38.3%,
+      rgba(180, 160, 110, 0.05) 38.6%,
+      transparent 39%,
+      transparent 100%
+    ),
+
+    /* Diagonal crease 2 */
+    linear-gradient(
+      52deg,
+      transparent 0%,
+      transparent 55%,
+      rgba(180, 160, 110, 0.04) 55.3%,
+      rgba(180, 160, 110, 0.04) 55.6%,
+      transparent 56%,
+      transparent 100%
+    ),
+
+    /* Subtle crumple light patches */
+    radial-gradient(
+      ellipse 70% 40% at 25% 20%,
+      rgba(50, 40, 22, 0.5) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 75% 65%,
+      rgba(0, 0, 0, 0.3) 0%,
+      transparent 100%
+    ),
+
+    /* Dark vignette */
+    radial-gradient(
+      ellipse 100% 100% at 50% 50%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+
+  box-shadow:
+    inset 18px 0 36px rgba(0, 0, 0, 0.25),
+    inset -8px 0 20px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .paperLayer1::after {
+  border-color: transparent transparent #0c0b07 transparent;
+}
+
+[data-theme="dark"] .paperLayer3 {
+  background: #0c0b07;
+}
+
+[data-theme="dark"] .paperLayer2 {
+  background: #100e09;
 }
