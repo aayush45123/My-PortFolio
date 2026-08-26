@@ -49,10 +49,13 @@ const Hero = () => {
       <div className={styles.heroContainer}>
         <div className={`${styles.heroContent} ${isVisible ? styles.visible : ""}`}>
 
-          {/* Editorial label */}
-          <div className={styles.sectionLabel}>Portfolio — 2025</div>
+          {/* Status Badge */}
+          <div className={styles.statusBadge}>
+            <span className={styles.statusDot}></span>
+            <span>Available for Full-Time & Freelance Roles</span>
+          </div>
 
-          {/* Name */}
+          {/* Name & Title */}
           <h1 className={styles.heroTitle}>
             <span className={styles.firstName}>Aayush Bharda</span>
             <span className={styles.lastName}>Developer.</span>
@@ -68,20 +71,19 @@ const Hero = () => {
 
           {/* Description */}
           <p className={styles.heroDescription}>
-            I build scalable web applications and embedded systems — focused on
-            clean code, sharp interfaces, and real-world impact.
+            I engineer scalable web platforms, analytical data pipelines, and embedded IoT systems — built with precision, speed, and production-grade reliability.
           </p>
 
           {/* Buttons */}
           <div className={styles.ctaButtons}>
             <button className={styles.btnPrimary} onClick={scrollToProjects}>
-              <span>View My Work</span>
+              <span>Explore My Work</span>
               <ArrowRight className={styles.btnIcon} size={18} />
             </button>
 
             <a href={resume} download className={styles.btnSecondary}>
               <Download size={16} />
-              <span>Download CV</span>
+              <span>Download Resume</span>
             </a>
           </div>
 

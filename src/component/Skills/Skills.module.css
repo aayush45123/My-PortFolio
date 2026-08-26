@@ -60,6 +60,8 @@
   gap: 8px;
   padding: 28px 32px;
   background: var(--card-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   margin-bottom: 48px;

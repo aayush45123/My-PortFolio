@@ -1,41 +1,40 @@
 /* ===================================
    GOOGLE FONTS
    =================================== */
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 /* ===================================
-   APP.CSS - DESIGN TOKENS
+   APP.CSS - DESIGN TOKENS (WORKSPACE GLASS)
    =================================== */
 
 :root {
-  /* Light Theme — clean white */
+  /* Light Theme (Crisp White Desk Workspace) */
   --bg-primary: #ffffff;
-  --bg-secondary: #f6f6f6;
-  --bg-tertiary: #eeeeee;
+  --bg-secondary: #f4f4f5;
+  --bg-tertiary: #e4e4e7;
 
-  --text-primary: #0a0a0a;
-  --text-secondary: #505050;
-  --text-tertiary: #909090;
+  --text-primary: #09090b;
+  --text-secondary: #4b5563;
+  --text-tertiary: #9ca3af;
 
-  --border-color: #e4e4e4;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 16px 40px rgba(0,0,0,0.12);
+  --border-color: rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.08);
 
-  --accent: #5B4FFF;
-  --accent-hover: #4840d4;
-  --accent-muted: rgba(91, 79, 255, 0.08);
+  --accent: #4F46E5;
+  --accent-hover: #4338CA;
+  --accent-muted: rgba(79, 70, 229, 0.08);
 
-  /* Keep for compatibility */
-  --accent-primary: #5B4FFF;
-  --accent-secondary: #4840d4;
-  --accent-gradient: linear-gradient(135deg, #5B4FFF 0%, #7c6fff 100%);
+  --accent-primary: #4F46E5;
+  --accent-secondary: #4338CA;
+  --accent-gradient: linear-gradient(135deg, #4F46E5 0%, #6366F1 100%);
 
-  --navbar-bg: rgba(255, 255, 255, 0.92);
-  --navbar-border: rgba(0, 0, 0, 0.08);
+  --navbar-bg: rgba(255, 255, 255, 0.72);
+  --navbar-border: rgba(0, 0, 0, 0.06);
 
-  --card-bg: #f9f9f9;
-  --card-hover: #f2f2f2;
+  --card-bg: rgba(255, 255, 255, 0.78);
+  --card-hover: rgba(255, 255, 255, 0.95);
 
   --transition-speed: 0.2s;
 
@@ -45,32 +44,33 @@
 }
 
 [data-theme="dark"] {
-  --bg-primary: #080808;
-  --bg-secondary: #111111;
-  --bg-tertiary: #1a1a1a;
+  /* Dark Theme (Minimal Dark Desk Workspace) */
+  --bg-primary: #09090b;
+  --bg-secondary: #121215;
+  --bg-tertiary: #1c1c21;
 
-  --text-primary: #ededed;
-  --text-secondary: #999;
-  --text-tertiary: #555;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
 
-  --border-color: #222222;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.4);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.5);
-  --shadow-lg: 0 16px 40px rgba(0,0,0,0.7);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.6);
 
-  --accent: #6C63FF;
-  --accent-hover: #5B4FFF;
-  --accent-muted: rgba(108, 99, 255, 0.1);
+  --accent: #6366F1;
+  --accent-hover: #4F46E5;
+  --accent-muted: rgba(99, 102, 241, 0.12);
 
-  --accent-primary: #6C63FF;
-  --accent-secondary: #5B4FFF;
-  --accent-gradient: linear-gradient(135deg, #6C63FF 0%, #9089ff 100%);
+  --accent-primary: #6366F1;
+  --accent-secondary: #4F46E5;
+  --accent-gradient: linear-gradient(135deg, #6366F1 0%, #818CF8 100%);
 
-  --navbar-bg: rgba(8, 8, 8, 0.9);
+  --navbar-bg: rgba(12, 12, 15, 0.72);
   --navbar-border: rgba(255, 255, 255, 0.06);
 
-  --card-bg: #111111;
-  --card-hover: #181818;
+  --card-bg: rgba(18, 18, 22, 0.78);
+  --card-hover: rgba(24, 24, 30, 0.92);
 }
 
 /* ===================================
@@ -88,12 +88,12 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--bg-primary);
   color: var(--text-primary);
-  transition: background-color 0.3s, color 0.3s;
+  background-color: var(--bg-primary);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 a {
