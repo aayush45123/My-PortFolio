@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Project.module.css";
 import ProjectCard from "../ProjectCard/ProjectCard";
+import { API_BASE } from "../../api/axios";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL;
-
-    fetch(`${API_URL}/api/projects`)
+    fetch(`${API_BASE}/api/projects`)
       .then((res) => res.json())
       .then((data) => setProjects(data))
       .catch((err) => console.log("Error fetching projects:", err));
@@ -36,7 +35,7 @@ const Projects = () => {
               project={{
                 title: project.title,
                 description: project.description,
-                image: `${import.meta.env.VITE_API_URL}${project.imageURL}`, // FIX
+                image: `${API_BASE}${project.imageURL}`,
                 tags: project.techStack,
                 liveLink: project.liveURL,
                 githubLink: project.githubURL,

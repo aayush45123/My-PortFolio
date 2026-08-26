@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Certifications.module.css";
+import { API_BASE } from "../../api/axios";
 
 const Certifications = () => {
   const [certifications, setCertifications] = useState([]);
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
-    const API_URL = import.meta.env.VITE_API_URL;
-
-    fetch(`${API_URL}/api/certificates`)
+    fetch(`${API_BASE}/api/certificates`)
       .then((res) => res.json())
       .then((data) => setCertifications(data))
       .catch((err) => console.log("Error fetching certificates:", err));
@@ -34,13 +33,13 @@ const Certifications = () => {
               className={styles.certCard}
               onClick={() =>
                 window.open(
-                  `${import.meta.env.VITE_API_URL}${cert.fileURL}`, // FIX
+                  `${API_BASE}${cert.fileURL}`,
                   "_blank"
                 )
               }
             >
               <img
-                src={`${import.meta.env.VITE_API_URL}${cert.thumbnailURL}`} // FIX
+                src={`${API_BASE}${cert.thumbnailURL}`}
                 alt={cert.title}
                 className={styles.certThumbnail}
               />
