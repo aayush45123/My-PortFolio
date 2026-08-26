@@ -52,21 +52,18 @@ const Hero = () => {
               <div className={styles.metaGrid}>
                 <div className={styles.metaItem}>
                   <span className={styles.metaKey}>SPECIALIZATION</span>
-                  <span className={styles.metaVal}>Full-Stack · Data · IoT</span>
+                  <span className={styles.metaVal}>Data Analyst</span>
                 </div>
                 <div className={styles.metaItem}>
                   <span className={styles.metaKey}>LOCATION</span>
                   <span className={styles.metaVal}>Mumbai, India</span>
                 </div>
-                <div className={styles.metaItem}>
-                  <span className={styles.metaKey}>STATUS</span>
-                  <span className={styles.metaVal}>Available for hire</span>
-                </div>
+
                 <div className={styles.metaItem}>
                   <span className={styles.metaKey}>FOCUS</span>
                   <span className={styles.metaVal}>React · Node · SQL · C++</span>
                 </div>
-                <div className={styles.metaItem} style={{gridColumn: '1 / -1'}}>
+                <div className={styles.metaItem}>
                   <span className={styles.metaKey}>LOOKING FOR</span>
                   <span className={styles.metaVal}>SE / Full-Stack Internships · 2025–26</span>
                 </div>

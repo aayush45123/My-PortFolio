@@ -160,8 +160,9 @@
 .metaGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 1px;
   border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  background: var(--border-color);
 }
 
 .metaItem {
@@ -169,16 +170,7 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  border-right: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.metaItem:nth-child(2n) {
-  border-right: none;
-}
-
-.metaItem:nth-last-child(-n+2) {
-  border-bottom: none;
+  background: var(--bg-secondary);
 }
 
 .metaKey {
