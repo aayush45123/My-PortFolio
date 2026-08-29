@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Github, Linkedin, Mail, Instagram, Twitter } from "lucide-react";
+import LeetCodeIcon from "../Icons/LeetCodeIcon";
 import styles from "./FloatingDock.module.css";
 
 const FloatingDock = () => {
@@ -11,6 +12,12 @@ const FloatingDock = () => {
       icon: Github,
       href: "https://github.com/aayush45123",
       color: "#333",
+    },
+    {
+      name: "LeetCode",
+      icon: LeetCodeIcon,
+      href: "https://leetcode.com/u/Aayush45123/",
+      color: "#FFA116",
     },
     {
       name: "LinkedIn",

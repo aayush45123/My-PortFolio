@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import styles from "./Contact.module.css";
 import { Mail, Phone, MapPin, Send, Linkedin, Github } from "lucide-react";
+import LeetCodeIcon from "../Icons/LeetCodeIcon";
 import emailjs from "emailjs-com";
 
 const Contact = () => {
@@ -84,6 +85,15 @@ const Contact = () => {
                 >
                   <Github size={15} />
                   <span>GitHub</span>
+                </a>
+                <a
+                  href="https://leetcode.com/u/Aayush45123/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.socialLink}
+                >
+                  <LeetCodeIcon size={15} />
+                  <span>LeetCode</span>
                 </a>
               </div>
             </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Footer.module.css";
 import { Linkedin, Github, Mail } from "lucide-react";
+import LeetCodeIcon from "../Icons/LeetCodeIcon";
 
 const Footer = () => {
   return (
@@ -24,6 +25,16 @@ const Footer = () => {
           >
             <Github size={16} />
             <span>GitHub</span>
+          </a>
+          <a
+            href="https://leetcode.com/u/Aayush45123/"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.socialLink}
+            aria-label="LeetCode"
+          >
+            <LeetCodeIcon size={16} />
+            <span>LeetCode</span>
           </a>
           <a
             href="https://www.linkedin.com/in/aayush-bharda-399958311/"
