@@ -52,7 +52,7 @@ const Hero = () => {
               <div className={styles.metaGrid}>
                 <div className={styles.metaItem}>
                   <span className={styles.metaKey}>SPECIALIZATION</span>
-                  <span className={styles.metaVal}>Data Analyst</span>
+                  <span className={styles.metaVal}>Full Stack Development</span>
                 </div>
                 <div className={styles.metaItem}>
                   <span className={styles.metaKey}>LOCATION</span>
