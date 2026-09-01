@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   // Define API URL for production build
   define: {
     "import.meta.env.VITE_API_URL": JSON.stringify(
-      mode === "production" ? "https://my-portfolio-wxe8.onrender.com" : ""
+      mode === "production" ? "https://my-portfolio-40jp.onrender.com" : ""
     ),
   },
 
