@@ -34,7 +34,7 @@ const Contact = () => {
       <div className={styles.contactContainer}>
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <span className={styles.sectionIndex}>[ 06 ]</span>
+          <span className={styles.sectionIndex}>[ 07 ]</span>
           <h2 className={styles.sectionTitle}>Get In Touch</h2>
         </div>
 

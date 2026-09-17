@@ -6,6 +6,7 @@ const path = require("path");
 
 const certificateRoutes = require("./routes/certificateRoutes");
 const projectRoutes = require("./routes/projectRoutes");
+const githubRoutes = require("./routes/githubRoutes");
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/api/certificates", certificateRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/github", githubRoutes);
 
 // MongoDB connection
 mongoose

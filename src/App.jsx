@@ -5,6 +5,7 @@ import Navbar from "./component/Navbar/Navbar";
 import Hero from "./component/Hero/Hero";
 import About from "./component/About/About";
 import Skills from "./component/Skills/Skills";
+import GitHubContributions from "./component/GitHubContributions/GitHubContributions";
 import LeetCodeStats from "./component/LeetCodeStats/LeetCodeStats";
 import Projects from "./component/Projects/Project";
 import Certifications from "./component/Certifications/Certifications";
@@ -23,6 +24,7 @@ const Home = () => (
     <Hero />
     <About />
     <Skills />
+    <GitHubContributions />
     <LeetCodeStats />
     <Projects />
     <Certifications />

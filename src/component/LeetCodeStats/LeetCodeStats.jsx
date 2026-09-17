@@ -175,7 +175,7 @@ const LeetCodeStats = () => {
         <div className={styles.sectionHeader}>
           <div className={styles.headerLeft}>
             <div className={styles.headerTitleGroup}>
-              <span className={styles.sectionIndex}>[ 03 ]</span>
+              <span className={styles.sectionIndex}>[ 04 ]</span>
               <h2 className={styles.sectionTitle}>LeetCode Journey</h2>
             </div>
             <p className={styles.sectionSubtitle}>
