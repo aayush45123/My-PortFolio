@@ -353,54 +353,6 @@ const LeetCodeStats = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Solved Ratio Distribution Bar */}
-              <div className={styles.distributionWrapper}>
-                <div className={styles.distHeader}>
-                  <span>Problem Difficulty Distribution</span>
-                  <span>{stats.totalSolved} Total Solved</span>
-                </div>
-                <div className={styles.progressBarTrack}>
-                  <div
-                    className={styles.progressSegmentEasy}
-                    style={{ width: `${stats.easyPct}%` }}
-                    title={`Easy: ${stats.easySolved} (${stats.easyPct}%)`}
-                  />
-                  <div
-                    className={styles.progressSegmentMedium}
-                    style={{ width: `${stats.mediumPct}%` }}
-                    title={`Medium: ${stats.mediumSolved} (${stats.mediumPct}%)`}
-                  />
-                  <div
-                    className={styles.progressSegmentHard}
-                    style={{ width: `${stats.hardPct}%` }}
-                    title={`Hard: ${stats.hardSolved} (${stats.hardPct}%)`}
-                  />
-                </div>
-                <div className={styles.distLegend}>
-                  <span>
-                    <span
-                      className={styles.legendDot}
-                      style={{ background: "#00b8a3" }}
-                    />
-                    Easy: {stats.easySolved} ({stats.easyPct}%)
-                  </span>
-                  <span>
-                    <span
-                      className={styles.legendDot}
-                      style={{ background: "#ffc01e" }}
-                    />
-                    Medium: {stats.mediumSolved} ({stats.mediumPct}%)
-                  </span>
-                  <span>
-                    <span
-                      className={styles.legendDot}
-                      style={{ background: "#ef4743" }}
-                    />
-                    Hard: {stats.hardSolved} ({stats.hardPct}%)
-                  </span>
-                </div>
-              </div>
             </div>
 
             {/* Coding Activity Calendar Heatmap */}

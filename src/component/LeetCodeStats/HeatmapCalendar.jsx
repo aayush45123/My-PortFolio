@@ -6,7 +6,24 @@ const MONTH_NAMES = [
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
-const WEEKDAYS = ["", "Mon", "", "Wed", "", "Fri", ""];
+const WEEKDAYS = [
+  { label: "", row: 0 },
+  { label: "Mon", row: 1 },
+  { label: "", row: 2 },
+  { label: "Wed", row: 3 },
+  { label: "", row: 4 },
+  { label: "Fri", row: 5 },
+  { label: "", row: 6 },
+];
+
+const CELL_SIZE = 13.5;
+const CELL_GAP = 3.5;
+const STEP = CELL_SIZE + CELL_GAP; // 17px
+const LEFT_PAD = 32;
+const TOP_PAD = 26;
+const TOTAL_WEEKS = 53;
+const SVG_WIDTH = LEFT_PAD + TOTAL_WEEKS * STEP; // 32 + 53 * 17 = 933
+const SVG_HEIGHT = TOP_PAD + 7 * STEP + 4; // 26 + 119 + 4 = 149
 
 const HeatmapCalendar = ({ submissionCalendar = {} }) => {
   const [tooltip, setTooltip] = useState(null);
@@ -21,7 +38,6 @@ const HeatmapCalendar = ({ submissionCalendar = {} }) => {
       for (const [timestamp, count] of Object.entries(submissionCalendar)) {
         const numCount = Number(count) || 0;
         const d = new Date(Number(timestamp) * 1000);
-        // Format to YYYY-MM-DD UTC
         const iso = d.toISOString().slice(0, 10);
         map[iso] = (map[iso] || 0) + numCount;
         total += numCount;
@@ -31,30 +47,32 @@ const HeatmapCalendar = ({ submissionCalendar = {} }) => {
     return { dateMap: map, totalSubmissionsInYear: total };
   }, [submissionCalendar]);
 
-  // Construct a 53-week calendar matrix ending on the coming/current Saturday
+  // Construct 53 weeks of days ending on the current week's Saturday
   const { weeks, monthHeaders } = useMemo(() => {
     const today = new Date();
-    // Normalize to midnight
-    const end = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
-    
-    // Day of week for end date (0 = Sun, 6 = Sat)
+    // Normalize to midnight UTC
+    const end = new Date(
+      Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate())
+    );
+
+    // Current day of week (0 = Sun, 6 = Sat)
     const endDayOfWeek = end.getUTCDay();
-    // Move to the upcoming or current Saturday to complete the grid
+    // End grid on the upcoming Saturday
     const gridEnd = new Date(end);
     gridEnd.setUTCDate(gridEnd.getUTCDate() + (6 - endDayOfWeek));
 
-    // Start date: 52 full weeks prior (52 * 7 = 364 days before gridEnd, which gives 53 total columns)
+    // Start grid 53 weeks prior
     const gridStart = new Date(gridEnd);
-    gridStart.setUTCDate(gridStart.getUTCDate() - (53 * 7 - 1));
+    gridStart.setUTCDate(gridStart.getUTCDate() - (TOTAL_WEEKS * 7 - 1));
 
     const weeksList = [];
     const months = [];
     let lastMonth = -1;
 
     let current = new Date(gridStart);
-    for (let w = 0; w < 53; w++) {
+    for (let w = 0; w < TOTAL_WEEKS; w++) {
       const days = [];
-      let weekMonth = -1;
+      let monthDetected = -1;
 
       for (let d = 0; d < 7; d++) {
         const dateCopy = new Date(current);
@@ -63,7 +81,7 @@ const HeatmapCalendar = ({ submissionCalendar = {} }) => {
         const isFuture = dateCopy > end;
 
         if (d === 0) {
-          weekMonth = dateCopy.getUTCMonth();
+          monthDetected = dateCopy.getUTCMonth();
         }
 
         days.push({
@@ -71,14 +89,19 @@ const HeatmapCalendar = ({ submissionCalendar = {} }) => {
           iso,
           count,
           isFuture,
+          col: w,
+          row: d,
         });
 
         current.setUTCDate(current.getUTCDate() + 1);
       }
 
-      if (weekMonth !== -1 && weekMonth !== lastMonth) {
-        months.push({ weekIndex: w, name: MONTH_NAMES[weekMonth] });
-        lastMonth = weekMonth;
+      // Add month label if month has changed and not too close to the end (week 51+)
+      if (monthDetected !== -1 && monthDetected !== lastMonth) {
+        if (w < 51) {
+          months.push({ weekIndex: w, name: MONTH_NAMES[monthDetected] });
+        }
+        lastMonth = monthDetected;
       }
 
       weeksList.push(days);
@@ -87,16 +110,16 @@ const HeatmapCalendar = ({ submissionCalendar = {} }) => {
     return { weeks: weeksList, monthHeaders: months };
   }, [dateMap]);
 
-  const getIntensityClass = (count, isFuture) => {
-    if (isFuture) return styles.emptyCell;
-    if (count === 0) return styles.level0;
-    if (count <= 2) return styles.level1;
-    if (count <= 5) return styles.level2;
-    if (count <= 9) return styles.level3;
-    return styles.level4;
+  const getLevelClass = (count, isFuture) => {
+    if (isFuture) return styles.cellFuture;
+    if (count === 0) return styles.cellLevel0;
+    if (count <= 2) return styles.cellLevel1;
+    if (count <= 5) return styles.cellLevel2;
+    if (count <= 9) return styles.cellLevel3;
+    return styles.cellLevel4;
   };
 
-  const handleMouseEnter = (day, e) => {
+  const handleCellHover = (day, e) => {
     if (day.isFuture || !containerRef.current) return;
     const rect = e.target.getBoundingClientRect();
     const containerRect = containerRef.current.getBoundingClientRect();
@@ -111,13 +134,12 @@ const HeatmapCalendar = ({ submissionCalendar = {} }) => {
     setTooltip({
       x: rect.left - containerRect.left + rect.width / 2,
       y: rect.top - containerRect.top,
-      text: `${day.count} submission${day.count === 1 ? "" : "s"} on ${dateFormatted}`,
       date: dateFormatted,
       count: day.count,
     });
   };
 
-  const handleMouseLeave = () => {
+  const handleCellLeave = () => {
     setTooltip(null);
   };
 
@@ -138,54 +160,66 @@ const HeatmapCalendar = ({ submissionCalendar = {} }) => {
         </div>
       )}
 
-      {/* Horizontally Scrollable Heatmap */}
-      <div className={styles.heatmapScrollArea}>
-        <div className={styles.heatmapContent}>
-          {/* Months header */}
-          <div className={styles.monthsRow}>
-            <span></span> {/* spacer for weekday labels */}
-            {weeks.map((_, i) => {
-              const header = monthHeaders.find((m) => m.weekIndex === i);
+      {/* Responsive SVG Calendar Container */}
+      <div className={styles.calendarSvgContainer}>
+        <svg
+          viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+          className={styles.heatmapSvg}
+          preserveAspectRatio="xMinYMin meet"
+        >
+          {/* Month Labels */}
+          {monthHeaders.map((m, idx) => (
+            <text
+              key={idx}
+              x={LEFT_PAD + m.weekIndex * STEP}
+              y={14}
+              className={styles.monthText}
+            >
+              {m.name}
+            </text>
+          ))}
+
+          {/* Weekday Labels (Mon, Wed, Fri) */}
+          {WEEKDAYS.map((w, idx) => {
+            if (!w.label) return null;
+            return (
+              <text
+                key={idx}
+                x={LEFT_PAD - 8}
+                y={TOP_PAD + w.row * STEP + CELL_SIZE * 0.78}
+                className={styles.weekdayText}
+              >
+                {w.label}
+              </text>
+            );
+          })}
+
+          {/* Heatmap Grid of Day Rectangles */}
+          {weeks.map((week, wIdx) =>
+            week.map((day) => {
+              const x = LEFT_PAD + wIdx * STEP;
+              const y = TOP_PAD + day.row * STEP;
+
               return (
-                <span key={i} className={header ? styles.monthLabel : ""}>
-                  {header ? header.name : ""}
-                </span>
+                <rect
+                  key={day.iso}
+                  x={x}
+                  y={y}
+                  width={CELL_SIZE}
+                  height={CELL_SIZE}
+                  rx={2.5}
+                  ry={2.5}
+                  className={`${styles.dayRect} ${getLevelClass(
+                    day.count,
+                    day.isFuture
+                  )}`}
+                  onMouseEnter={(e) => handleCellHover(day, e)}
+                  onMouseLeave={handleCellLeave}
+                />
               );
-            })}
-          </div>
-
-          {/* Weekday labels + Days Grid */}
-          <div className={styles.gridRow}>
-            {/* Weekday indicators */}
-            <div className={styles.weekdayLabels}>
-              {WEEKDAYS.map((day, idx) => (
-                <span key={idx} className={styles.weekdayLabel}>
-                  {day}
-                </span>
-              ))}
-            </div>
-
-            {/* Weeks */}
-            <div className={styles.weeksGrid}>
-              {weeks.map((week, wIdx) => (
-                <div key={wIdx} className={styles.weekColumn}>
-                  {week.map((day) => (
-                    <div
-                      key={day.iso}
-                      className={`${styles.dayCell} ${getIntensityClass(
-                        day.count,
-                        day.isFuture
-                      )}`}
-                      onMouseEnter={(e) => handleMouseEnter(day, e)}
-                      onMouseLeave={handleMouseLeave}
-                      aria-label={`${day.count} submissions on ${day.iso}`}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+            })
+          )}
+        </svg>
       </div>
 
       {/* Heatmap Footer: Total Submissions & Intensity Legend */}
@@ -197,11 +231,11 @@ const HeatmapCalendar = ({ submissionCalendar = {} }) => {
 
         <div className={styles.legend}>
           <span className={styles.legendText}>Less</span>
-          <span className={`${styles.legendCell} ${styles.level0}`} title="0 submissions" />
-          <span className={`${styles.legendCell} ${styles.level1}`} title="1-2 submissions" />
-          <span className={`${styles.legendCell} ${styles.level2}`} title="3-5 submissions" />
-          <span className={`${styles.legendCell} ${styles.level3}`} title="6-9 submissions" />
-          <span className={`${styles.legendCell} ${styles.level4}`} title="10+ submissions" />
+          <span className={`${styles.legendCell} ${styles.cellLevel0}`} title="0 submissions" />
+          <span className={`${styles.legendCell} ${styles.cellLevel1}`} title="1-2 submissions" />
+          <span className={`${styles.legendCell} ${styles.cellLevel2}`} title="3-5 submissions" />
+          <span className={`${styles.legendCell} ${styles.cellLevel3}`} title="6-9 submissions" />
+          <span className={`${styles.legendCell} ${styles.cellLevel4}`} title="10+ submissions" />
           <span className={styles.legendText}>More</span>
         </div>
       </div>
