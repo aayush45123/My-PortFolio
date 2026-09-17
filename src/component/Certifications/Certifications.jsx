@@ -36,7 +36,7 @@ const Certifications = () => {
       <div className={styles.certContainer}>
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <span className={styles.sectionIndex}>[ 04 ]</span>
+          <span className={styles.sectionIndex}>[ 05 ]</span>
           <h2 className={styles.sectionTitle}>Certifications & Honors</h2>
         </div>
 

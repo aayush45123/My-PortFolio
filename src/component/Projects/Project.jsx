@@ -36,7 +36,7 @@ const Projects = () => {
       <div className={styles.projectsContainer}>
         {/* Section Header */}
         <div className={styles.sectionHeader}>
-          <span className={styles.sectionIndex}>[ 03 ]</span>
+          <span className={styles.sectionIndex}>[ 04 ]</span>
           <h2 className={styles.sectionTitle}>Selected Works</h2>
         </div>
 

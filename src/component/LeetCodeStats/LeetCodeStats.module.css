@@ -1,0 +1,712 @@
+/* ===================================
+   LEETCODE STATS — MONOCHROME EDITORIAL
+   =================================== */
+
+.leetcodeSection {
+  padding: 100px 60px;
+  border-top: 1px solid var(--border-color);
+  position: relative;
+  background-color: transparent;
+}
+
+.leetcodeContainer {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Header */
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 48px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid var(--text-primary);
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.headerTitleGroup {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.sectionIndex {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+}
+
+.sectionTitle {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.04em;
+}
+
+.sectionSubtitle {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.profileLinkBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.profileLinkBtn:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Main Grid Layout */
+.mainLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* User Overview Ledger Strip */
+.overviewStrip {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border-color);
+  border: 1px solid var(--border-color);
+}
+
+.overviewCard {
+  background: var(--card-bg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  transition: background 0.2s ease;
+}
+
+.overviewCard:hover {
+  background: var(--card-hover);
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.cardLabel {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+
+.cardIcon {
+  color: var(--text-tertiary);
+  opacity: 0.85;
+}
+
+.userCardBody {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.userAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  object-fit: cover;
+  background: var(--bg-secondary);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.userHandle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.statValue {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.statMeta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+}
+
+/* Difficulties Grid */
+.difficultySection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.difficultyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.diffCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.diffCard:hover {
+  background: var(--card-hover);
+  transform: translateY(-2px);
+}
+
+.diffCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.diffCardEasy::before {
+  background: #00b8a3;
+}
+
+.diffCardMedium::before {
+  background: #ffc01e;
+}
+
+.diffCardHard::before {
+  background: #ef4743;
+}
+
+.diffHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.diffTitle {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.diffTitleEasy {
+  color: #00b8a3;
+}
+
+.diffTitleMedium {
+  color: #e09e00;
+}
+
+[data-theme="dark"] .diffTitleMedium {
+  color: #ffc01e;
+}
+
+.diffTitleHard {
+  color: #ef4743;
+}
+
+.diffPercent {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  padding: 2px 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+}
+
+.diffBody {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.diffCount {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.diffSubmissions {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+/* Distribution Progress Bar */
+.distributionWrapper {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 18px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.distHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.progressBarTrack {
+  width: 100%;
+  height: 10px;
+  background: var(--bg-secondary);
+  border-radius: 5px;
+  display: flex;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+.progressSegmentEasy {
+  height: 100%;
+  background: #00b8a3;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.progressSegmentMedium {
+  height: 100%;
+  background: #ffc01e;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.progressSegmentHard {
+  height: 100%;
+  background: #ef4743;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.distLegend {
+  display: flex;
+  gap: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+}
+
+.legendDot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Activity Heatmap Card */
+.heatmapSectionCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.heatmapHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.heatmapTitleGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.heatmapTitle {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.yearPill {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+/* Badges Section */
+.badgesSection {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.badgesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.badgesTitle {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.badgeCountPill {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 3px 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+.badgesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.badgeCard {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.badgeCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.badgeImageWrapper {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.badgeImg {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.badgeCard:hover .badgeImg {
+  transform: scale(1.08);
+}
+
+.badgeFallbackIcon {
+  width: 48px;
+  height: 48px;
+  color: var(--accent-amber);
+}
+
+.badgeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.badgeName {
+  font-family: var(--font-heading);
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badgeMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+}
+
+.badgeCategory {
+  padding: 2px 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+
+.emptyBadges {
+  padding: 32px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-tertiary);
+  border: 1px dashed var(--border-color);
+}
+
+/* Skeleton Loading State */
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.skeletonStrip {
+  height: 120px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.skeletonCard {
+  height: 140px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+.skeletonHeatmap {
+  height: 220px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+/* Error State */
+.errorCard {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 48px 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.errorIcon {
+  color: var(--text-tertiary);
+}
+
+.errorTitle {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.errorMessage {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  max-width: 500px;
+}
+
+.errorActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.retryBtn {
+  padding: 8px 18px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border: 1px solid var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.retryBtn:hover {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+/* Responsive Media Queries */
+@media (min-width: 1600px) {
+  .leetcodeContainer {
+    max-width: 1600px;
+  }
+  .leetcodeSection {
+    padding: 120px 80px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .overviewStrip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .userOverviewCard {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 960px) {
+  .leetcodeSection {
+    padding: 80px 24px;
+  }
+  .difficultyGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .overviewStrip {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .userOverviewCard {
+    grid-column: span 2;
+  }
+  .difficultyGrid {
+    grid-template-columns: 1fr;
+  }
+  .badgesGrid {
+    grid-template-columns: 1fr;
+  }
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .profileLinkBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .leetcodeSection {
+    padding: 60px 16px;
+  }
+  .overviewStrip {
+    grid-template-columns: 1fr;
+  }
+  .userOverviewCard {
+    grid-column: span 1;
+  }
+  .overviewCard {
+    padding: 18px;
+  }
+  .diffCard {
+    padding: 18px;
+  }
+  .heatmapSectionCard {
+    padding: 20px 14px;
+  }
+  .badgesSection {
+    padding: 20px 14px;
+  }
+}
