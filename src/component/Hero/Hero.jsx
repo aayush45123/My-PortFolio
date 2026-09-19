@@ -31,9 +31,7 @@ const Hero = () => {
         <div className={styles.heroInner}>
           {/* Left Column — Giant Headline */}
           <div className={styles.headlineCol}>
-            <p className={styles.issueDate}>
-              Engineer / 2025
-            </p>
+
             <h1 className={styles.heroTitle}>
               Aayush<br />Bharda
             </h1>
@@ -61,11 +59,11 @@ const Hero = () => {
 
                 <div className={styles.metaItem}>
                   <span className={styles.metaKey}>FOCUS</span>
-                  <span className={styles.metaVal}>React · Node · SQL · C++</span>
+                  <span className={styles.metaVal}>React · Node · SQL · C++ · Power BI</span>
                 </div>
                 <div className={styles.metaItem}>
                   <span className={styles.metaKey}>LOOKING FOR</span>
-                  <span className={styles.metaVal}>SE / Full-Stack Internships · 2025–26</span>
+                  <span className={styles.metaVal}>SE / Full-Stack Internships · 2026 to 2027</span>
                 </div>
               </div>
 
